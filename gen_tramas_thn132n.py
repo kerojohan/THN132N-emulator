@@ -19,7 +19,7 @@ M_TABLE = {
      -4: 0x204,  -3: 0x2B2,  -2: 0x2E3,  -1: 0x210,
       0: 0x2C2,   1: 0x148,   2: 0x1BB,   3: 0x1EA,
       4: 0x15C,   5: 0x10D,   6: 0x1FE,   7: 0x1AF,
-      8: 0x193,   9: 0x1C2,  10: 0x11E,  11: 0x14F,
+      8: 0x193,   9: 0x1C2,  10: 0x100,  11: 0x14F,
      12: 0x1BC,  13: 0x236,  14: 0x280,  15: 0x10A,
      16: 0x1F9,  17: 0x1A8,  18: 0x194,  19: 0x866,
      20: 0x2CC,  21: 0x146,  22: 0x1B5,  23: 0x1E4,
@@ -79,6 +79,11 @@ def calc_R12(temp_c: float) -> int:
         e = M_MIN_E
     if e > M_MAX_E:
         e = M_MAX_E
+    # Clamp d to valid range [0-9] to avoid IndexError
+    if d < 0:
+        d = 0
+    if d > 9:
+        d = 9
     P = P_TABLE[d]
     M = M_TABLE[e]
     return (P ^ M) & 0x0FFF
@@ -136,7 +141,7 @@ def build_ec40_post(temp_c: float,
     msg[3] = (msg[3] & 0xF0) | ((r12 >> 8) & 0x0F)
     msg[7] = r12 & 0xFF
 
-    msg[6] = calc_os21_checksum(msg)
+    msg[6] = calc_os21_checksum(msg[:6])
     return bytes(msg)
 
 # ---------- Manchester + RAW ----------
