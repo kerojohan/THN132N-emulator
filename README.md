@@ -6,16 +6,16 @@ Proyecto de emulación del sensor de temperatura Oregon Scientific THN132N (cód
 
 ### 📂 `/Docs`
 
-Contiene documentación técnica oficial de Oregon Scientific:
+Contiene documentación técnica obtenida mediante ingeniería inversa:
 
-- **`Oregon_THN132N_BAR206.pdf`**: Especificaciones técnicas oficiales del sensor Oregon Scientific THN132N y protocolo BAR206. Incluye:
-  - Características del sensor de temperatura
-  - Rango de operación (-50°C a +70°C)
-  - Protocolo de comunicación RF 433 MHz
-  - Formato de trama Oregon Scientific v2.1
-  - Especificaciones eléctricas y mecánicas
+- **`Oregon_THN132N_BAR206.pdf`**: Documentación del sensor Oregon Scientific THN132N y protocolo BAR206 extraída mediante reverse engineering. Incluye:
+  - Análisis del protocolo de comunicación RF 433 MHz
+  - Estructura de la trama Oregon Scientific v2.1
+  - Decodificación del formato EC40
+  - Tablas P[d] y M[e] para el cálculo del rolling code R12
+  - Codificación Manchester y timing OOK
 
-Esta documentación fue utilizada como referencia para el desarrollo del emulador y validación del protocolo.
+Esta documentación fue creada mediante el análisis de tramas reales capturadas con rtl_433 y sirve como referencia para el desarrollo del emulador.
 
 ## 📁 Archivos del Proyecto
 
