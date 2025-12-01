@@ -220,13 +220,18 @@ donde:
 ### Tablas P y M
 Las tablas P[d] y M[e] fueron extraídas mediante reverse engineering de tramas reales capturadas con rtl_433. Estas tablas son idénticas en los tres archivos para garantizar compatibilidad.
 
-**Caso especial 10.0°C:**  
-M[10] = 0x100 (corregido del valor original 0x14F)
+**Correcciones validadas con receptor BAR206:**
+- **M[10] = 0x100** (corregido del valor original 0x14F) - para temperatura 10.0°C
+- **M[18] = 0x03C** (corregido del valor original 0x194) - para temperatura 18.x°C
+
+> [!IMPORTANT]
+> El valor M[18] = 0x03C fue verificado mediante pruebas reales con el receptor Oregon Scientific BAR206. El valor anterior (0x194) generaba un R12 incorrecto que era rechazado por el receptor.
 
 ### Timing OOK (On-Off Keying)
 - **Semibit:** ~488-500 µs
 - **Bit completo:** ~976-1000 µs
-- **Pausa entre tramas:** ~10 ms
+- **Gap entre ráfagas:** ~4.1 ms (ajustado para compensar overhead del código)
+- **Transmisiones por trama:** 2 ráfagas completas (como el sensor real)
 
 ### Deep Sleep (Futuro)
 El código ATtiny85 puede ser extendido con:
