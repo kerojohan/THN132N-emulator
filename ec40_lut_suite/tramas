@@ -1,0 +1,1 @@
+Uso: python3 gen_trama_visible.py <temp_C> [device_id] [channel]

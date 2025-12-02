@@ -15,8 +15,6 @@
 #include <math.h>
 #include "driver/rmt.h"
 #include "driver/gpio.h"
-#include <OneWire.h>
-#include <DallasTemperature.h>
 
 // ---------------------------------------------------------------------------
 // CONFIGURACIÓN HW RMT / RF
@@ -26,16 +24,14 @@
 #define RMT_CH    RMT_CHANNEL_0
 #define T_UNIT    488  // µs por semibit (≈ 976 µs / bit del sensor real)
 
-// Configuración del sensor DS18B20
-#define ONE_WIRE_BUS  GPIO_NUM_5  // Pin para el sensor DS18B20 (cámbialo según tu conexión)
-
-// Inicialización de OneWire y DallasTemperature
-OneWire oneWire(ONE_WIRE_BUS);
-DallasTemperature sensors(&oneWire);
-
 // Parámetros de configuración
 static uint8_t CHANNEL    = 1;      // 1..3
 static uint8_t DEVICE_ID  = 247;     // House Code
+
+// Barrido automático de temperatura: 18.4°C a 50°C con incrementos de 0.1°C
+static const float TEMP_MIN  = 18.4f;
+static const float TEMP_MAX  = 50.0f;
+static const float TEMP_STEP =  0.1f;
 
 // ---------------------------------------------------------------------------
 // FUNCIONES RMT EXISTENTES (adaptadas de tu código)
@@ -321,46 +317,54 @@ void setup() {
   delay(2000);
 
   Serial.println();
-  Serial.println(F("Oregon THN132N – Generador integrado EC40 + RAW + RMT con DS18B20"));
-  
-  // Inicializar el sensor DS18B20
-  sensors.begin();
-  Serial.print(F("Sensores DS18B20 encontrados: "));
-  Serial.println(sensors.getDeviceCount());
-  
+  Serial.println(F("Oregon THN132N – Generador integrado EC40 + RAW + RMT"));
+  Serial.println(F("========================================================"));
+  Serial.print(F("Canal: "));
+  Serial.println(CHANNEL);
+  Serial.print(F("Device ID: "));
+  Serial.println(DEVICE_ID);
+  Serial.println(F("========================================================"));
+  Serial.println(F("\nIntroduce una temperatura (°C) y presiona Enter:"));
   setup_rmt();
 }
 
+
 void loop() {
-  static uint32_t lastSend = 0;
-  const uint32_t periodMs  = 40 * 1000UL; // cada 40 s
+  static uint32_t transmitCount = 0;
 
-  uint32_t now = millis();
-  if (now - lastSend >= periodMs) {
-    lastSend = now;
-
-    // Leer temperatura del sensor DS18B20
-    sensors.requestTemperatures();
-    float temp_c = sensors.getTempCByIndex(0);
+  // Verificar si hay datos disponibles en el puerto serie
+  if (Serial.available() > 0) {
+    // Leer la temperatura como string
+    String input = Serial.readStringUntil('\n');
+    input.trim(); // Eliminar espacios en blanco
     
-    // Verificar si la lectura es válida
-    if (temp_c == DEVICE_DISCONNECTED_C) {
-      Serial.println(F("Error: No se pudo leer el sensor DS18B20"));
+    // Convertir a float
+    float temp = input.toFloat();
+    
+    // Validar que la temperatura esté en un rango razonable
+    if (temp < -50.0f || temp > 70.0f) {
+      Serial.println(F("ERROR: Temperatura fuera de rango (-50 a 70°C)"));
+      Serial.println(F("Introduce una temperatura válida:"));
       return;
     }
-
+    
+    transmitCount++;
+    
     uint8_t ec40[8];
-    build_ec40_post(temp_c, CHANNEL, DEVICE_ID, ec40);
+    build_ec40_post(temp, CHANNEL, DEVICE_ID, ec40);
 
     Serial.println();
-    Serial.print(F("Temp="));
-    Serial.print(temp_c, 1);
+    Serial.print(F("[#"));
+    Serial.print(transmitCount);
+    Serial.print(F("] Temp="));
+    Serial.print(temp, 1);
     Serial.print(F(" C, CH="));
     Serial.print(CHANNEL);
     Serial.print(F(", DEV="));
     Serial.println(DEVICE_ID);
 
     sendOregonFrame(ec40, 8);
+    
+    Serial.println(F("\nTransmisión completada. Introduce otra temperatura:"));
   }
 }
-

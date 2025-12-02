@@ -1,0 +1,13 @@
+
+# Python virtual environment
+ec40_lut_suite/env/
+env/
+venv/
+.env
+.venv
+__pycache__/
+*.pyc
+
+# IDEs
+.vscode/
+.idea/

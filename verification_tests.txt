@@ -1,0 +1,1604 @@
+VERIFICATION TEST PLAN FOR BAR206
+=================================
+
+For each discrepant temperature, we list the 'Current M' (used in code) and 'Alternative Ms' (found in captures).
+Test Procedure: Transmit frames using each M value and check if BAR206 receives it.
+
+Temp Integer: -14 °C (Current M = 0x203)
+----------------------------------------
+  Temp: -14.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x203 (Current Code) => R12=0x276
+    -> Test M=0x06E (Captured 2 times) => R12=0x01B
+
+  Temp: -14.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x203 (Current Code) => R12=0x29C
+    -> Test M=0x06E (Captured 2 times) => R12=0x0F1
+
+  Temp: -14.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x203 (Current Code) => R12=0x25C
+    -> Test M=0x06E (Captured 2 times) => R12=0x031
+
+
+Temp Integer: -13 °C (Current M = 0x2B5)
+----------------------------------------
+  Temp: -13.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x2B5 (Current Code) => R12=0x25F
+    -> Test M=0x0D8 (Captured 2 times) => R12=0x032
+
+  Temp: -13.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x2B5 (Current Code) => R12=0x275
+    -> Test M=0x0D8 (Captured 2 times) => R12=0x018
+
+  Temp: -13.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x2B5 (Current Code) => R12=0x2EA
+    -> Test M=0x0D8 (Captured 2 times) => R12=0x087
+
+  Temp: -13.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x2B5 (Current Code) => R12=0x2AB
+    -> Test M=0x0D8 (Captured 2 times) => R12=0x0C6
+
+
+Temp Integer: -12 °C (Current M = 0x2E4)
+----------------------------------------
+  Temp: -12.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x2E4 (Current Code) => R12=0x20E
+    -> Test M=0x089 (Captured 2 times) => R12=0x063
+
+  Temp: -12.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x2E4 (Current Code) => R12=0x224
+    -> Test M=0x089 (Captured 2 times) => R12=0x049
+
+  Temp: -12.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x2E4 (Current Code) => R12=0x2CE
+    -> Test M=0x089 (Captured 2 times) => R12=0x0A3
+
+  Temp: -12.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x2E4 (Current Code) => R12=0x2FA
+    -> Test M=0x089 (Captured 2 times) => R12=0x097
+
+
+Temp Integer: -11 °C (Current M = 0x217)
+----------------------------------------
+  Temp: -11.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x217 (Current Code) => R12=0x262
+    -> Test M=0x07A (Captured 2 times) => R12=0x00F
+
+  Temp: -11.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x217 (Current Code) => R12=0x2A2
+    -> Test M=0x07A (Captured 2 times) => R12=0x0CF
+
+  Temp: -11.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x217 (Current Code) => R12=0x248
+    -> Test M=0x07A (Captured 2 times) => R12=0x025
+
+  Temp: -11.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x217 (Current Code) => R12=0x209
+    -> Test M=0x07A (Captured 2 times) => R12=0x064
+
+
+Temp Integer: -10 °C (Current M = 0x246)
+----------------------------------------
+  Temp: -10.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x246 (Current Code) => R12=0x246
+    -> Test M=0x02B (Captured 2 times) => R12=0x02B
+
+  Temp: -10.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x246 (Current Code) => R12=0x2AC
+    -> Test M=0x02B (Captured 2 times) => R12=0x0C1
+
+  Temp: -10.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x246 (Current Code) => R12=0x286
+    -> Test M=0x02B (Captured 2 times) => R12=0x0EB
+
+  Temp: -10.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x246 (Current Code) => R12=0x22D
+    -> Test M=0x02B (Captured 2 times) => R12=0x040
+
+
+Temp Integer: -9 °C (Current M = 0x29A)
+----------------------------------------
+  Temp: -9.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x29A (Current Code) => R12=0x270
+    -> Test M=0x0F7 (Captured 2 times) => R12=0x01D
+
+  Temp: -9.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x29A (Current Code) => R12=0x22F
+    -> Test M=0x0F7 (Captured 2 times) => R12=0x042
+
+  Temp: -9.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x29A (Current Code) => R12=0x2B0
+    -> Test M=0x0F7 (Captured 2 times) => R12=0x0DD
+
+
+Temp Integer: -8 °C (Current M = 0x2CB)
+----------------------------------------
+  Temp: -8.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x2CB (Current Code) => R12=0x2CB
+    -> Test M=0x0A6 (Captured 2 times) => R12=0x0A6
+
+  Temp: -8.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x2CB (Current Code) => R12=0x254
+    -> Test M=0x0A6 (Captured 2 times) => R12=0x039
+
+  Temp: -8.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x2CB (Current Code) => R12=0x294
+    -> Test M=0x0A6 (Captured 4 times) => R12=0x0F9
+
+  Temp: -8.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x2CB (Current Code) => R12=0x2D5
+    -> Test M=0x0A6 (Captured 2 times) => R12=0x0B8
+
+
+Temp Integer: -7 °C (Current M = 0x2F7)
+----------------------------------------
+  Temp: -7.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x2F7 (Current Code) => R12=0x2F7
+    -> Test M=0x09A (Captured 2 times) => R12=0x09A
+
+  Temp: -7.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x2F7 (Current Code) => R12=0x21D
+    -> Test M=0x09A (Captured 2 times) => R12=0x070
+
+  Temp: -7.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x2F7 (Current Code) => R12=0x237
+    -> Test M=0x09A (Captured 2 times) => R12=0x05A
+
+  Temp: -7.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x2F7 (Current Code) => R12=0x29C
+    -> Test M=0x09A (Captured 2 times) => R12=0x0F1
+
+
+Temp Integer: -6 °C (Current M = 0x2A6)
+----------------------------------------
+  Temp: -6.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x2A6 (Current Code) => R12=0x24C
+    -> Test M=0x0CB (Captured 2 times) => R12=0x021
+
+  Temp: -6.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x2A6 (Current Code) => R12=0x213
+    -> Test M=0x0CB (Captured 2 times) => R12=0x07E
+
+  Temp: -6.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x2A6 (Current Code) => R12=0x28C
+    -> Test M=0x0CB (Captured 2 times) => R12=0x0E1
+
+
+Temp Integer: -5 °C (Current M = 0x255)
+----------------------------------------
+  Temp: -5.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x255 (Current Code) => R12=0x220
+    -> Test M=0x038 (Captured 2 times) => R12=0x04D
+
+  Temp: -5.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x255 (Current Code) => R12=0x2E0
+    -> Test M=0x038 (Captured 2 times) => R12=0x08D
+
+  Temp: -5.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x255 (Current Code) => R12=0x27F
+    -> Test M=0x038 (Captured 2 times) => R12=0x012
+
+  Temp: -5.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x255 (Current Code) => R12=0x24B
+    -> Test M=0x038 (Captured 2 times) => R12=0x026
+
+
+Temp Integer: -4 °C (Current M = 0x204)
+----------------------------------------
+  Temp: -4.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x204 (Current Code) => R12=0x271
+    -> Test M=0x069 (Captured 2 times) => R12=0x01C
+
+  Temp: -4.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x204 (Current Code) => R12=0x2B1
+    -> Test M=0x069 (Captured 2 times) => R12=0x0DC
+
+  Temp: -4.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x204 (Current Code) => R12=0x25B
+    -> Test M=0x069 (Captured 2 times) => R12=0x036
+
+  Temp: -4.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x204 (Current Code) => R12=0x26F
+    -> Test M=0x069 (Captured 2 times) => R12=0x002
+
+
+Temp Integer: -3 °C (Current M = 0x2B2)
+----------------------------------------
+  Temp: -3.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x2B2 (Current Code) => R12=0x258
+    -> Test M=0x0DF (Captured 4 times) => R12=0x035
+
+  Temp: -3.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x2B2 (Current Code) => R12=0x2ED
+    -> Test M=0x0DF (Captured 2 times) => R12=0x080
+
+  Temp: -3.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x2B2 (Current Code) => R12=0x2AC
+    -> Test M=0x0DF (Captured 2 times) => R12=0x0C1
+
+
+Temp Integer: -2 °C (Current M = 0x2E3)
+----------------------------------------
+  Temp: -2.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x2E3 (Current Code) => R12=0x2E3
+    -> Test M=0x138 (Captured 2 times) => R12=0x138
+
+  Temp: -2.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x2E3 (Current Code) => R12=0x209
+    -> Test M=0x138 (Captured 2 times) => R12=0x1D2
+
+  Temp: -2.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x2E3 (Current Code) => R12=0x256
+    -> Test M=0x138 (Captured 2 times) => R12=0x18D
+
+  Temp: -2.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x2E3 (Current Code) => R12=0x2C9
+    -> Test M=0x08E (Captured 2 times) => R12=0x0A4
+
+
+Temp Integer: -1 °C (Current M = 0x210)
+----------------------------------------
+  Temp: -1.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x210 (Current Code) => R12=0x210
+    -> Test M=0x1CB (Captured 2 times) => R12=0x1CB
+
+  Temp: -1.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x210 (Current Code) => R12=0x28F
+    -> Test M=0x1CB (Captured 2 times) => R12=0x154
+
+  Temp: -1.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x210 (Current Code) => R12=0x2D0
+    -> Test M=0x1CB (Captured 2 times) => R12=0x10B
+
+  Temp: -1.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x210 (Current Code) => R12=0x23A
+    -> Test M=0x1CB (Captured 2 times) => R12=0x1E1
+
+
+Temp Integer: 0 °C (Current M = 0x2C2)
+----------------------------------------
+  Temp: 0.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x2C2 (Current Code) => R12=0x2C2
+    -> Test M=0x241 (Captured 2 times) => R12=0x241
+    -> Test M=0x19A (Captured 2 times) => R12=0x19A
+
+  Temp: 0.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x2C2 (Current Code) => R12=0x228
+    -> Test M=0x241 (Captured 2 times) => R12=0x2AB
+    -> Test M=0x19A (Captured 2 times) => R12=0x170
+    -> Test M=0x119 (Captured 2 times) => R12=0x1F3
+
+  Temp: 0.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x2C2 (Current Code) => R12=0x25D
+    -> Test M=0x119 (Captured 2 times) => R12=0x186
+
+  Temp: 0.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x2C2 (Current Code) => R12=0x277
+    -> Test M=0x241 (Captured 2 times) => R12=0x2F4
+    -> Test M=0x19A (Captured 2 times) => R12=0x12F
+
+  Temp: 0.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x2C2 (Current Code) => R12=0x29D
+    -> Test M=0x241 (Captured 2 times) => R12=0x21E
+    -> Test M=0x19A (Captured 2 times) => R12=0x1C5
+    -> Test M=0x119 (Captured 2 times) => R12=0x146
+
+  Temp: 0.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x2C2 (Current Code) => R12=0x2A9
+    -> Test M=0x241 (Captured 2 times) => R12=0x22A
+    -> Test M=0x19A (Captured 2 times) => R12=0x1F1
+
+
+Temp Integer: 1 °C (Current M = 0x148)
+----------------------------------------
+  Temp: 1.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x148 (Current Code) => R12=0x148
+    -> Test M=0x293 (Captured 2 times) => R12=0x293
+
+  Temp: 1.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x148 (Current Code) => R12=0x1A2
+    -> Test M=0x293 (Captured 2 times) => R12=0x279
+
+  Temp: 1.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x148 (Current Code) => R12=0x1FD
+    -> Test M=0x293 (Captured 2 times) => R12=0x226
+
+  Temp: 1.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x148 (Current Code) => R12=0x117
+    -> Test M=0x293 (Captured 2 times) => R12=0x2CC
+
+  Temp: 1.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x148 (Current Code) => R12=0x123
+    -> Test M=0x293 (Captured 2 times) => R12=0x2F8
+
+
+Temp Integer: 2 °C (Current M = 0x1BB)
+----------------------------------------
+  Temp: 2.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x1BB (Current Code) => R12=0x1BB
+    -> Test M=0x260 (Captured 2 times) => R12=0x260
+
+  Temp: 2.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x1BB (Current Code) => R12=0x151
+    -> Test M=0x260 (Captured 2 times) => R12=0x28A
+
+  Temp: 2.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x1BB (Current Code) => R12=0x191
+    -> Test M=0x260 (Captured 2 times) => R12=0x24A
+
+  Temp: 2.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x1BB (Current Code) => R12=0x1A5
+    -> Test M=0x260 (Captured 2 times) => R12=0x27E
+
+
+Temp Integer: 3 °C (Current M = 0x1EA)
+----------------------------------------
+  Temp: 3.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x1EA (Current Code) => R12=0x19F
+    -> Test M=0x231 (Captured 2 times) => R12=0x244
+
+  Temp: 3.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x1EA (Current Code) => R12=0x175
+    -> Test M=0x231 (Captured 4 times) => R12=0x2AE
+
+  Temp: 3.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x1EA (Current Code) => R12=0x12A
+    -> Test M=0x231 (Captured 2 times) => R12=0x2F1
+
+  Temp: 3.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x1EA (Current Code) => R12=0x181
+    -> Test M=0x231 (Captured 2 times) => R12=0x25A
+
+
+Temp Integer: 4 °C (Current M = 0x15C)
+----------------------------------------
+  Temp: 4.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x15C (Current Code) => R12=0x15C
+    -> Test M=0x287 (Captured 2 times) => R12=0x287
+
+  Temp: 4.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x15C (Current Code) => R12=0x1B6
+    -> Test M=0x287 (Captured 2 times) => R12=0x26D
+
+  Temp: 4.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x15C (Current Code) => R12=0x1E9
+    -> Test M=0x287 (Captured 2 times) => R12=0x232
+
+  Temp: 4.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x15C (Current Code) => R12=0x142
+    -> Test M=0x287 (Captured 2 times) => R12=0x299
+
+
+Temp Integer: 5 °C (Current M = 0x10D)
+----------------------------------------
+  Temp: 5.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x10D (Current Code) => R12=0x178
+    -> Test M=0x2D6 (Captured 2 times) => R12=0x2A3
+
+  Temp: 5.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x10D (Current Code) => R12=0x1B8
+    -> Test M=0x2D6 (Captured 2 times) => R12=0x263
+
+  Temp: 5.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x10D (Current Code) => R12=0x152
+    -> Test M=0x2D6 (Captured 2 times) => R12=0x289
+
+  Temp: 5.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x10D (Current Code) => R12=0x166
+    -> Test M=0x2D6 (Captured 2 times) => R12=0x2BD
+
+
+Temp Integer: 6 °C (Current M = 0x1FE)
+----------------------------------------
+  Temp: 6.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x1FE (Current Code) => R12=0x18B
+    -> Test M=0x225 (Captured 2 times) => R12=0x250
+
+  Temp: 6.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x1FE (Current Code) => R12=0x161
+    -> Test M=0x225 (Captured 2 times) => R12=0x2BA
+
+  Temp: 6.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x1FE (Current Code) => R12=0x1A1
+    -> Test M=0x225 (Captured 2 times) => R12=0x27A
+
+
+Temp Integer: 7 °C (Current M = 0x1AF)
+----------------------------------------
+  Temp: 7.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x1AF (Current Code) => R12=0x1DA
+    -> Test M=0x274 (Captured 2 times) => R12=0x201
+
+  Temp: 7.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x1AF (Current Code) => R12=0x130
+    -> Test M=0x274 (Captured 2 times) => R12=0x2EB
+
+  Temp: 7.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x1AF (Current Code) => R12=0x1F0
+    -> Test M=0x274 (Captured 2 times) => R12=0x22B
+
+  Temp: 7.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x1AF (Current Code) => R12=0x1C4
+    -> Test M=0x274 (Captured 2 times) => R12=0x21F
+
+
+Temp Integer: 8 °C (Current M = 0x193)
+----------------------------------------
+  Temp: 8.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x193 (Current Code) => R12=0x1E6
+    -> Test M=0x248 (Captured 2 times) => R12=0x23D
+
+  Temp: 8.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x193 (Current Code) => R12=0x126
+    -> Test M=0x248 (Captured 2 times) => R12=0x2FD
+
+  Temp: 8.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x193 (Current Code) => R12=0x1CC
+    -> Test M=0x248 (Captured 2 times) => R12=0x217
+
+  Temp: 8.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x193 (Current Code) => R12=0x18D
+    -> Test M=0x248 (Captured 2 times) => R12=0x256
+
+
+Temp Integer: 9 °C (Current M = 0x1C2)
+----------------------------------------
+  Temp: 9.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x1C2 (Current Code) => R12=0x1B7
+    -> Test M=0x219 (Captured 2 times) => R12=0x26C
+
+  Temp: 9.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x1C2 (Current Code) => R12=0x1E8
+    -> Test M=0x219 (Captured 2 times) => R12=0x233
+
+
+Temp Integer: 10 °C (Current M = 0x11E)
+----------------------------------------
+  Temp: 10.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x11E (Current Code) => R12=0x11E
+    -> Test M=0x2C5 (Captured 2 times) => R12=0x2C5
+
+  Temp: 10.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x11E (Current Code) => R12=0x1F4
+    -> Test M=0x2C5 (Captured 2 times) => R12=0x22F
+
+  Temp: 10.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x11E (Current Code) => R12=0x1DE
+    -> Test M=0x2C5 (Captured 2 times) => R12=0x205
+
+  Temp: 10.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x11E (Current Code) => R12=0x175
+    -> Test M=0x2C5 (Captured 2 times) => R12=0x2AE
+
+
+Temp Integer: 11 °C (Current M = 0x14F)
+----------------------------------------
+  Temp: 11.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x14F (Current Code) => R12=0x13A
+    -> Test M=0x294 (Captured 2 times) => R12=0x2E1
+
+  Temp: 11.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x14F (Current Code) => R12=0x1FA
+    -> Test M=0x294 (Captured 2 times) => R12=0x221
+
+  Temp: 11.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x14F (Current Code) => R12=0x165
+    -> Test M=0x294 (Captured 2 times) => R12=0x2BE
+
+
+Temp Integer: 12 °C (Current M = 0x1BC)
+----------------------------------------
+  Temp: 12.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x1BC (Current Code) => R12=0x156
+    -> Test M=0x267 (Captured 2 times) => R12=0x28D
+
+  Temp: 12.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x1BC (Current Code) => R12=0x17C
+    -> Test M=0x267 (Captured 2 times) => R12=0x2A7
+
+  Temp: 12.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x1BC (Current Code) => R12=0x1D7
+    -> Test M=0x267 (Captured 2 times) => R12=0x20C
+
+
+Temp Integer: 13 °C (Current M = 0x236)
+----------------------------------------
+  Temp: 13.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x236 (Current Code) => R12=0x236
+    -> Test M=0x1ED (Captured 2 times) => R12=0x1ED
+
+  Temp: 13.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x236 (Current Code) => R12=0x243
+    -> Test M=0x05B (Captured 2 times) => R12=0x02E
+    -> Test M=0x1ED (Captured 2 times) => R12=0x198
+
+  Temp: 13.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x236 (Current Code) => R12=0x2DC
+    -> Test M=0x05B (Captured 12 times) => R12=0x0B1
+    -> Test M=0x1ED (Captured 4 times) => R12=0x107
+
+  Temp: 13.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x236 (Current Code) => R12=0x2A9
+    -> Test M=0x1ED (Captured 2 times) => R12=0x172
+
+  Temp: 13.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x236 (Current Code) => R12=0x283
+    -> Test M=0x1ED (Captured 8 times) => R12=0x158
+
+  Temp: 13.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x236 (Current Code) => R12=0x2F6
+    -> Test M=0x05B (Captured 2 times) => R12=0x09B
+    -> Test M=0x1ED (Captured 2 times) => R12=0x12D
+
+  Temp: 13.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x236 (Current Code) => R12=0x269
+    -> Test M=0x1ED (Captured 4 times) => R12=0x1B2
+
+  Temp: 13.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x236 (Current Code) => R12=0x21C
+    -> Test M=0x1ED (Captured 2 times) => R12=0x1C7
+
+  Temp: 13.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x236 (Current Code) => R12=0x25D
+    -> Test M=0x1ED (Captured 4 times) => R12=0x186
+    -> Test M=0x05B (Captured 2 times) => R12=0x030
+
+  Temp: 13.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x236 (Current Code) => R12=0x228
+    -> Test M=0x1ED (Captured 6 times) => R12=0x1F3
+
+
+Temp Integer: 14 °C (Current M = 0x280)
+----------------------------------------
+  Temp: 14.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x280 (Current Code) => R12=0x280
+    -> Test M=0x15B (Captured 2 times) => R12=0x15B
+
+  Temp: 14.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x280 (Current Code) => R12=0x2F5
+    -> Test M=0x15B (Captured 4 times) => R12=0x12E
+    -> Test M=0x0ED (Captured 2 times) => R12=0x098
+
+  Temp: 14.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x280 (Current Code) => R12=0x26A
+    -> Test M=0x15B (Captured 4 times) => R12=0x1B1
+
+  Temp: 14.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x280 (Current Code) => R12=0x21F
+    -> Test M=0x15B (Captured 4 times) => R12=0x1C4
+    -> Test M=0x0ED (Captured 2 times) => R12=0x072
+
+  Temp: 14.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x280 (Current Code) => R12=0x235
+    -> Test M=0x15B (Captured 4 times) => R12=0x1EE
+
+  Temp: 14.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x280 (Current Code) => R12=0x240
+    -> Test M=0x15B (Captured 6 times) => R12=0x19B
+
+  Temp: 14.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x280 (Current Code) => R12=0x2DF
+    -> Test M=0x15B (Captured 6 times) => R12=0x104
+    -> Test M=0x0ED (Captured 2 times) => R12=0x0B2
+
+  Temp: 14.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x280 (Current Code) => R12=0x2AA
+    -> Test M=0x15B (Captured 4 times) => R12=0x171
+
+  Temp: 14.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x280 (Current Code) => R12=0x2EB
+    -> Test M=0x15B (Captured 4 times) => R12=0x130
+    -> Test M=0x0ED (Captured 2 times) => R12=0x086
+
+  Temp: 14.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x280 (Current Code) => R12=0x29E
+    -> Test M=0x15B (Captured 6 times) => R12=0x145
+
+
+Temp Integer: 15 °C (Current M = 0x10A)
+----------------------------------------
+  Temp: 15.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x10A (Current Code) => R12=0x10A
+    -> Test M=0x8A9 (Captured 2 times) => R12=0x8A9
+
+  Temp: 15.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x10A (Current Code) => R12=0x17F
+    -> Test M=0x2D1 (Captured 1 times) => R12=0x2A4
+
+  Temp: 15.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x10A (Current Code) => R12=0x1E0
+    -> Test M=0x2D1 (Captured 1 times) => R12=0x23B
+
+  Temp: 15.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x10A (Current Code) => R12=0x195
+    -> Test M=0x0BC (Captured 2 times) => R12=0x023
+    -> Test M=0x8A9 (Captured 2 times) => R12=0x836
+
+  Temp: 15.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x10A (Current Code) => R12=0x1BF
+    -> Test M=0x2D1 (Captured 1 times) => R12=0x264
+
+  Temp: 15.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x10A (Current Code) => R12=0x1CA
+    -> Test M=0x0BC (Captured 2 times) => R12=0x07C
+    -> Test M=0x8A9 (Captured 2 times) => R12=0x869
+    -> Test M=0x2D1 (Captured 2 times) => R12=0x211
+
+  Temp: 15.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x10A (Current Code) => R12=0x120
+    -> Test M=0x0BC (Captured 2 times) => R12=0x096
+
+  Temp: 15.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x10A (Current Code) => R12=0x161
+    -> Test M=0x2D1 (Captured 3 times) => R12=0x2BA
+    -> Test M=0x8A9 (Captured 2 times) => R12=0x8C2
+
+
+Temp Integer: 16 °C (Current M = 0x1F9)
+----------------------------------------
+  Temp: 16.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x1F9 (Current Code) => R12=0x1F9
+    -> Test M=0x04F (Captured 2 times) => R12=0x04F
+    -> Test M=0x85A (Captured 2 times) => R12=0x85A
+    -> Test M=0x222 (Captured 2 times) => R12=0x222
+
+  Temp: 16.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x1F9 (Current Code) => R12=0x18C
+    -> Test M=0x04F (Captured 2 times) => R12=0x03A
+    -> Test M=0x222 (Captured 1 times) => R12=0x257
+
+  Temp: 16.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x1F9 (Current Code) => R12=0x166
+    -> Test M=0x222 (Captured 3 times) => R12=0x2BD
+    -> Test M=0x04F (Captured 2 times) => R12=0x0D0
+    -> Test M=0x85A (Captured 2 times) => R12=0x8C5
+
+  Temp: 16.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x1F9 (Current Code) => R12=0x139
+    -> Test M=0x04F (Captured 2 times) => R12=0x08F
+    -> Test M=0x85A (Captured 2 times) => R12=0x89A
+
+  Temp: 16.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x1F9 (Current Code) => R12=0x1A6
+    -> Test M=0x222 (Captured 3 times) => R12=0x27D
+    -> Test M=0x04F (Captured 2 times) => R12=0x010
+
+  Temp: 16.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x1F9 (Current Code) => R12=0x192
+    -> Test M=0x04F (Captured 2 times) => R12=0x024
+    -> Test M=0x85A (Captured 2 times) => R12=0x831
+    -> Test M=0x222 (Captured 2 times) => R12=0x249
+
+  Temp: 16.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x1F9 (Current Code) => R12=0x1E7
+    -> Test M=0x222 (Captured 1 times) => R12=0x23C
+
+
+Temp Integer: 17 °C (Current M = 0x1A8)
+----------------------------------------
+  Temp: 17.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x1A8 (Current Code) => R12=0x1A8
+    -> Test M=0x01E (Captured 2 times) => R12=0x01E
+
+  Temp: 17.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x1A8 (Current Code) => R12=0x1DD
+    -> Test M=0x273 (Captured 3 times) => R12=0x206
+
+  Temp: 17.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x1A8 (Current Code) => R12=0x142
+    -> Test M=0x01E (Captured 2 times) => R12=0x0F4
+    -> Test M=0x80B (Captured 2 times) => R12=0x8E1
+    -> Test M=0x273 (Captured 1 times) => R12=0x299
+
+  Temp: 17.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x1A8 (Current Code) => R12=0x137
+    -> Test M=0x01E (Captured 2 times) => R12=0x081
+
+  Temp: 17.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x1A8 (Current Code) => R12=0x11D
+    -> Test M=0x01E (Captured 2 times) => R12=0x0AB
+    -> Test M=0x273 (Captured 1 times) => R12=0x2C6
+
+  Temp: 17.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x1A8 (Current Code) => R12=0x168
+    -> Test M=0x01E (Captured 2 times) => R12=0x0DE
+    -> Test M=0x80B (Captured 2 times) => R12=0x8CB
+    -> Test M=0x273 (Captured 1 times) => R12=0x2B3
+
+  Temp: 17.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x1A8 (Current Code) => R12=0x1F7
+    -> Test M=0x01E (Captured 2 times) => R12=0x041
+    -> Test M=0x273 (Captured 2 times) => R12=0x22C
+
+  Temp: 17.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x1A8 (Current Code) => R12=0x182
+    -> Test M=0x01E (Captured 2 times) => R12=0x034
+    -> Test M=0x80B (Captured 2 times) => R12=0x821
+    -> Test M=0x273 (Captured 1 times) => R12=0x259
+
+  Temp: 17.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x1A8 (Current Code) => R12=0x1C3
+    -> Test M=0x01E (Captured 2 times) => R12=0x075
+    -> Test M=0x273 (Captured 1 times) => R12=0x218
+
+  Temp: 17.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x1A8 (Current Code) => R12=0x1B6
+    -> Test M=0x01E (Captured 4 times) => R12=0x000
+    -> Test M=0x80B (Captured 2 times) => R12=0x815
+    -> Test M=0x273 (Captured 2 times) => R12=0x26D
+
+
+Temp Integer: 18 °C (Current M = 0x194)
+----------------------------------------
+  Temp: 18.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x194 (Current Code) => R12=0x194
+    -> Test M=0x24F (Captured 4 times) => R12=0x24F
+
+  Temp: 18.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x194 (Current Code) => R12=0x1E1
+    -> Test M=0x837 (Captured 2 times) => R12=0x842
+    -> Test M=0x24F (Captured 2 times) => R12=0x23A
+
+  Temp: 18.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x194 (Current Code) => R12=0x17E
+    -> Test M=0x24F (Captured 3 times) => R12=0x2A5
+
+  Temp: 18.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x194 (Current Code) => R12=0x10B
+    -> Test M=0x837 (Captured 2 times) => R12=0x8A8
+    -> Test M=0x24F (Captured 1 times) => R12=0x2D0
+
+  Temp: 18.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x194 (Current Code) => R12=0x121
+    -> Test M=0x837 (Captured 2 times) => R12=0x882
+
+  Temp: 18.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x194 (Current Code) => R12=0x154
+    -> Test M=0x24F (Captured 2 times) => R12=0x28F
+
+  Temp: 18.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x194 (Current Code) => R12=0x1CB
+    -> Test M=0x837 (Captured 2 times) => R12=0x868
+
+  Temp: 18.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x194 (Current Code) => R12=0x1FF
+    -> Test M=0x837 (Captured 2 times) => R12=0x85C
+
+  Temp: 18.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x194 (Current Code) => R12=0x18A
+    -> Test M=0x837 (Captured 2 times) => R12=0x829
+
+
+Temp Integer: 19 °C (Current M = 0x866)
+----------------------------------------
+  Temp: 19.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x866 (Current Code) => R12=0x813
+    -> Test M=0x073 (Captured 2 times) => R12=0x006
+
+  Temp: 19.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x866 (Current Code) => R12=0x88C
+    -> Test M=0x1C5 (Captured 2 times) => R12=0x12F
+
+  Temp: 19.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x866 (Current Code) => R12=0x839
+    -> Test M=0x21E (Captured 2 times) => R12=0x241
+
+  Temp: 19.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x866 (Current Code) => R12=0x80D
+    -> Test M=0x1C5 (Captured 2 times) => R12=0x1AE
+
+
+Temp Integer: 20 °C (Current M = 0x2CC)
+----------------------------------------
+  Temp: 20.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x2CC (Current Code) => R12=0x2CC
+    -> Test M=0x8B4 (Captured 4 times) => R12=0x8B4
+
+  Temp: 20.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x2CC (Current Code) => R12=0x2B9
+    -> Test M=0x8B4 (Captured 4 times) => R12=0x8C1
+    -> Test M=0x0A1 (Captured 2 times) => R12=0x0D4
+
+  Temp: 20.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x2CC (Current Code) => R12=0x226
+    -> Test M=0x8B4 (Captured 6 times) => R12=0x85E
+
+  Temp: 20.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x2CC (Current Code) => R12=0x253
+    -> Test M=0x8B4 (Captured 6 times) => R12=0x82B
+    -> Test M=0x117 (Captured 2 times) => R12=0x188
+
+  Temp: 20.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x2CC (Current Code) => R12=0x279
+    -> Test M=0x8B4 (Captured 4 times) => R12=0x801
+
+  Temp: 20.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x2CC (Current Code) => R12=0x20C
+    -> Test M=0x8B4 (Captured 2 times) => R12=0x874
+
+  Temp: 20.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x2CC (Current Code) => R12=0x2E6
+    -> Test M=0x8B4 (Captured 2 times) => R12=0x89E
+
+  Temp: 20.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x2CC (Current Code) => R12=0x2A7
+    -> Test M=0x8B4 (Captured 2 times) => R12=0x8DF
+
+  Temp: 20.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x2CC (Current Code) => R12=0x2D2
+    -> Test M=0x8B4 (Captured 6 times) => R12=0x8AA
+    -> Test M=0x117 (Captured 2 times) => R12=0x109
+
+
+Temp Integer: 21 °C (Current M = 0x146)
+----------------------------------------
+  Temp: 21.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x146 (Current Code) => R12=0x146
+    -> Test M=0x29D (Captured 4 times) => R12=0x29D
+    -> Test M=0x8E5 (Captured 2 times) => R12=0x8E5
+
+  Temp: 21.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x146 (Current Code) => R12=0x133
+    -> Test M=0x29D (Captured 8 times) => R12=0x2E8
+
+  Temp: 21.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x146 (Current Code) => R12=0x1AC
+    -> Test M=0x29D (Captured 2 times) => R12=0x277
+
+  Temp: 21.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x146 (Current Code) => R12=0x1D9
+    -> Test M=0x29D (Captured 4 times) => R12=0x202
+
+  Temp: 21.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x146 (Current Code) => R12=0x1F3
+    -> Test M=0x29D (Captured 2 times) => R12=0x228
+
+  Temp: 21.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x146 (Current Code) => R12=0x186
+    -> Test M=0x0F0 (Captured 2 times) => R12=0x030
+
+
+Temp Integer: 22 °C (Current M = 0x1B5)
+----------------------------------------
+  Temp: 22.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x1B5 (Current Code) => R12=0x1C0
+    -> Test M=0x26E (Captured 1 times) => R12=0x21B
+
+  Temp: 22.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x1B5 (Current Code) => R12=0x175
+    -> Test M=0x003 (Captured 2 times) => R12=0x0C3
+
+
+Temp Integer: 23 °C (Current M = 0x1E4)
+----------------------------------------
+  Temp: 23.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x1E4 (Current Code) => R12=0x191
+    -> Test M=0x052 (Captured 2 times) => R12=0x027
+
+  Temp: 23.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x1E4 (Current Code) => R12=0x10E
+    -> Test M=0x052 (Captured 2 times) => R12=0x0B8
+
+  Temp: 23.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x1E4 (Current Code) => R12=0x17B
+    -> Test M=0x052 (Captured 6 times) => R12=0x0CD
+
+  Temp: 23.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x1E4 (Current Code) => R12=0x151
+    -> Test M=0x052 (Captured 2 times) => R12=0x0E7
+
+  Temp: 23.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x1E4 (Current Code) => R12=0x1CE
+    -> Test M=0x052 (Captured 2 times) => R12=0x078
+
+
+Temp Integer: 24 °C (Current M = 0x152)
+----------------------------------------
+  Temp: 24.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x152 (Current Code) => R12=0x152
+    -> Test M=0x0E4 (Captured 2 times) => R12=0x0E4
+
+  Temp: 24.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x152 (Current Code) => R12=0x127
+    -> Test M=0x0E4 (Captured 2 times) => R12=0x091
+
+  Temp: 24.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x152 (Current Code) => R12=0x1B8
+    -> Test M=0x0E4 (Captured 2 times) => R12=0x00E
+
+  Temp: 24.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x152 (Current Code) => R12=0x1E7
+    -> Test M=0x0E4 (Captured 2 times) => R12=0x051
+
+  Temp: 24.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x152 (Current Code) => R12=0x192
+    -> Test M=0x0E4 (Captured 4 times) => R12=0x024
+
+  Temp: 24.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x152 (Current Code) => R12=0x178
+    -> Test M=0x0E4 (Captured 2 times) => R12=0x0CE
+
+
+Temp Integer: 25 °C (Current M = 0x103)
+----------------------------------------
+  Temp: 25.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x103 (Current Code) => R12=0x176
+    -> Test M=0x0B5 (Captured 2 times) => R12=0x0C0
+
+  Temp: 25.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x103 (Current Code) => R12=0x19C
+    -> Test M=0x0B5 (Captured 2 times) => R12=0x02A
+
+  Temp: 25.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x103 (Current Code) => R12=0x1B6
+    -> Test M=0x0B5 (Captured 2 times) => R12=0x000
+
+  Temp: 25.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x103 (Current Code) => R12=0x15C
+    -> Test M=0x0B5 (Captured 2 times) => R12=0x0EA
+
+  Temp: 25.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x103 (Current Code) => R12=0x129
+    -> Test M=0x0B5 (Captured 2 times) => R12=0x09F
+
+  Temp: 25.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x103 (Current Code) => R12=0x168
+    -> Test M=0x2D8 (Captured 1 times) => R12=0x2B3
+
+  Temp: 25.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x103 (Current Code) => R12=0x11D
+    -> Test M=0x0B5 (Captured 2 times) => R12=0x0AB
+
+
+Temp Integer: 26 °C (Current M = 0x1F0)
+----------------------------------------
+  Temp: 26.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x1F0 (Current Code) => R12=0x185
+    -> Test M=0x046 (Captured 2 times) => R12=0x033
+
+  Temp: 26.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x1F0 (Current Code) => R12=0x11A
+    -> Test M=0x046 (Captured 2 times) => R12=0x0AC
+
+  Temp: 26.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x1F0 (Current Code) => R12=0x16F
+    -> Test M=0x046 (Captured 2 times) => R12=0x0D9
+
+  Temp: 26.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x1F0 (Current Code) => R12=0x130
+    -> Test M=0x046 (Captured 2 times) => R12=0x086
+
+  Temp: 26.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x1F0 (Current Code) => R12=0x1AF
+    -> Test M=0x22B (Captured 2 times) => R12=0x274
+    -> Test M=0x046 (Captured 2 times) => R12=0x019
+
+  Temp: 26.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x1F0 (Current Code) => R12=0x1DA
+    -> Test M=0x22B (Captured 4 times) => R12=0x201
+
+  Temp: 26.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x1F0 (Current Code) => R12=0x19B
+    -> Test M=0x22B (Captured 4 times) => R12=0x240
+    -> Test M=0x046 (Captured 2 times) => R12=0x02D
+
+  Temp: 26.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x1F0 (Current Code) => R12=0x1EE
+    -> Test M=0x22B (Captured 2 times) => R12=0x235
+
+
+Temp Integer: 27 °C (Current M = 0x1A1)
+----------------------------------------
+  Temp: 27.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x1A1 (Current Code) => R12=0x1A1
+    -> Test M=0x27A (Captured 2 times) => R12=0x27A
+    -> Test M=0x017 (Captured 2 times) => R12=0x017
+
+  Temp: 27.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x1A1 (Current Code) => R12=0x1D4
+    -> Test M=0x27A (Captured 2 times) => R12=0x20F
+
+  Temp: 27.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x1A1 (Current Code) => R12=0x14B
+    -> Test M=0x27A (Captured 2 times) => R12=0x290
+
+  Temp: 27.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x1A1 (Current Code) => R12=0x13E
+    -> Test M=0x27A (Captured 2 times) => R12=0x2E5
+
+  Temp: 27.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x1A1 (Current Code) => R12=0x161
+    -> Test M=0x27A (Captured 4 times) => R12=0x2BA
+
+  Temp: 27.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x1A1 (Current Code) => R12=0x1FE
+    -> Test M=0x27A (Captured 2 times) => R12=0x225
+
+  Temp: 27.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x1A1 (Current Code) => R12=0x1CA
+    -> Test M=0x27A (Captured 2 times) => R12=0x211
+
+  Temp: 27.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x1A1 (Current Code) => R12=0x1BF
+    -> Test M=0x27A (Captured 2 times) => R12=0x264
+
+
+Temp Integer: 28 °C (Current M = 0x246)
+----------------------------------------
+  Temp: 28.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x246 (Current Code) => R12=0x246
+    -> Test M=0x19D (Captured 1 times) => R12=0x19D
+
+  Temp: 28.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x246 (Current Code) => R12=0x233
+    -> Test M=0x19D (Captured 2 times) => R12=0x1E8
+
+  Temp: 28.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x246 (Current Code) => R12=0x2AC
+    -> Test M=0x19D (Captured 2 times) => R12=0x177
+
+  Temp: 28.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x246 (Current Code) => R12=0x2D9
+    -> Test M=0x19D (Captured 2 times) => R12=0x102
+
+  Temp: 28.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x246 (Current Code) => R12=0x286
+    -> Test M=0x19D (Captured 2 times) => R12=0x15D
+
+  Temp: 28.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x246 (Current Code) => R12=0x219
+    -> Test M=0x19D (Captured 3 times) => R12=0x1C2
+
+  Temp: 28.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x246 (Current Code) => R12=0x26C
+    -> Test M=0x19D (Captured 2 times) => R12=0x1B7
+
+  Temp: 28.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x246 (Current Code) => R12=0x22D
+    -> Test M=0x19D (Captured 2 times) => R12=0x1F6
+
+  Temp: 28.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x246 (Current Code) => R12=0x258
+    -> Test M=0x19D (Captured 2 times) => R12=0x183
+
+
+Temp Integer: 29 °C (Current M = 0x1CC)
+----------------------------------------
+  Temp: 29.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x1CC (Current Code) => R12=0x1CC
+    -> Test M=0x217 (Captured 2 times) => R12=0x217
+
+  Temp: 29.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x1CC (Current Code) => R12=0x126
+    -> Test M=0x217 (Captured 2 times) => R12=0x2FD
+
+  Temp: 29.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x1CC (Current Code) => R12=0x179
+    -> Test M=0x217 (Captured 2 times) => R12=0x2A2
+
+  Temp: 29.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x1CC (Current Code) => R12=0x193
+    -> Test M=0x217 (Captured 2 times) => R12=0x248
+
+  Temp: 29.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x1CC (Current Code) => R12=0x1E6
+    -> Test M=0x217 (Captured 2 times) => R12=0x23D
+
+  Temp: 29.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x1CC (Current Code) => R12=0x1D2
+    -> Test M=0x217 (Captured 2 times) => R12=0x209
+
+
+Temp Integer: 30 °C (Current M = 0x110)
+----------------------------------------
+  Temp: 30.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x110 (Current Code) => R12=0x110
+    -> Test M=0x2CB (Captured 2 times) => R12=0x2CB
+
+  Temp: 30.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x110 (Current Code) => R12=0x1FA
+    -> Test M=0x2CB (Captured 2 times) => R12=0x221
+
+  Temp: 30.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x110 (Current Code) => R12=0x18F
+    -> Test M=0x2CB (Captured 2 times) => R12=0x254
+
+  Temp: 30.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x110 (Current Code) => R12=0x1D0
+    -> Test M=0x2CB (Captured 2 times) => R12=0x20B
+
+  Temp: 30.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x110 (Current Code) => R12=0x17B
+    -> Test M=0x2CB (Captured 2 times) => R12=0x2A0
+
+  Temp: 30.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x110 (Current Code) => R12=0x10E
+    -> Test M=0x2CB (Captured 2 times) => R12=0x2D5
+
+
+Temp Integer: 31 °C (Current M = 0x141)
+----------------------------------------
+  Temp: 31.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x141 (Current Code) => R12=0x134
+    -> Test M=0x29A (Captured 2 times) => R12=0x2EF
+
+  Temp: 31.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x141 (Current Code) => R12=0x1DE
+    -> Test M=0x29A (Captured 2 times) => R12=0x205
+
+  Temp: 31.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x141 (Current Code) => R12=0x1F4
+    -> Test M=0x29A (Captured 2 times) => R12=0x22F
+
+  Temp: 31.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x141 (Current Code) => R12=0x11E
+    -> Test M=0x29A (Captured 2 times) => R12=0x2C5
+
+  Temp: 31.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x141 (Current Code) => R12=0x12A
+    -> Test M=0x29A (Captured 2 times) => R12=0x2F1
+
+
+Temp Integer: 32 °C (Current M = 0x1B2)
+----------------------------------------
+  Temp: 32.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x1B2 (Current Code) => R12=0x1B2
+    -> Test M=0x811 (Captured 2 times) => R12=0x811
+
+  Temp: 32.2 °C (d=2)
+    P[2] = 0x0EA
+    -> Test M=0x1B2 (Current Code) => R12=0x158
+    -> Test M=0x811 (Captured 2 times) => R12=0x8FB
+
+  Temp: 32.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x1B2 (Current Code) => R12=0x12D
+    -> Test M=0x811 (Captured 2 times) => R12=0x88E
+
+  Temp: 32.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x1B2 (Current Code) => R12=0x172
+    -> Test M=0x811 (Captured 2 times) => R12=0x8D1
+
+  Temp: 32.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x1B2 (Current Code) => R12=0x198
+    -> Test M=0x811 (Captured 2 times) => R12=0x83B
+
+  Temp: 32.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x1B2 (Current Code) => R12=0x1AC
+    -> Test M=0x811 (Captured 2 times) => R12=0x80F
+
+
+Temp Integer: 33 °C (Current M = 0x1E3)
+----------------------------------------
+  Temp: 33.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x1E3 (Current Code) => R12=0x196
+    -> Test M=0x840 (Captured 2 times) => R12=0x835
+
+  Temp: 33.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x1E3 (Current Code) => R12=0x156
+    -> Test M=0x840 (Captured 2 times) => R12=0x8F5
+
+  Temp: 33.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x1E3 (Current Code) => R12=0x1BC
+    -> Test M=0x840 (Captured 2 times) => R12=0x81F
+
+  Temp: 33.8 °C (d=8)
+    P[8] = 0x06B
+    -> Test M=0x1E3 (Current Code) => R12=0x188
+    -> Test M=0x840 (Captured 2 times) => R12=0x82B
+
+
+Temp Integer: 34 °C (Current M = 0x8F6)
+----------------------------------------
+  Temp: 34.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x8F6 (Current Code) => R12=0x8F6
+    -> Test M=0x155 (Captured 1 times) => R12=0x155
+
+  Temp: 34.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x8F6 (Current Code) => R12=0x883
+    -> Test M=0x155 (Captured 2 times) => R12=0x120
+
+  Temp: 34.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x8F6 (Current Code) => R12=0x8A9
+    -> Test M=0x28E (Captured 1 times) => R12=0x2D1
+
+
+Temp Integer: 35 °C (Current M = 0x8A7)
+----------------------------------------
+  Temp: 35.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x8A7 (Current Code) => R12=0x838
+    -> Test M=0x104 (Captured 1 times) => R12=0x19B
+
+
+Temp Integer: 36 °C (Current M = 0x854)
+----------------------------------------
+  Temp: 36.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x854 (Current Code) => R12=0x84A
+    -> Test M=0x1F7 (Captured 1 times) => R12=0x1E9
+
+
+Temp Integer: 38 °C (Current M = 0x839)
+----------------------------------------
+  Temp: 38.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x839 (Current Code) => R12=0x866
+    -> Test M=0x19A (Captured 1 times) => R12=0x1C5
+
+
+Temp Integer: 40 °C (Current M = 0x8C6)
+----------------------------------------
+  Temp: 40.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x8C6 (Current Code) => R12=0x8B3
+    -> Test M=0x165 (Captured 2 times) => R12=0x110
+
+  Temp: 40.7 °C (d=7)
+    P[7] = 0x02A
+    -> Test M=0x8C6 (Current Code) => R12=0x8EC
+    -> Test M=0x165 (Captured 1 times) => R12=0x14F
+
+
+Temp Integer: 41 °C (Current M = 0x897)
+----------------------------------------
+  Temp: 41.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x897 (Current Code) => R12=0x808
+    -> Test M=0x134 (Captured 1 times) => R12=0x1AB
+
+  Temp: 41.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x897 (Current Code) => R12=0x857
+    -> Test M=0x2EF (Captured 1 times) => R12=0x22F
+
+
+Temp Integer: 43 °C (Current M = 0x835)
+----------------------------------------
+  Temp: 43.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x835 (Current Code) => R12=0x835
+    -> Test M=0x196 (Captured 1 times) => R12=0x196
+
+  Temp: 43.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x835 (Current Code) => R12=0x880
+    -> Test M=0x196 (Captured 1 times) => R12=0x123
+
+
+Temp Integer: 45 °C (Current M = 0x8D2)
+----------------------------------------
+  Temp: 45.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x8D2 (Current Code) => R12=0x8CC
+    -> Test M=0x171 (Captured 1 times) => R12=0x16F
+
+
+Temp Integer: 46 °C (Current M = 0x821)
+----------------------------------------
+  Temp: 46.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x821 (Current Code) => R12=0x87E
+    -> Test M=0x182 (Captured 1 times) => R12=0x1DD
+
+
+Temp Integer: 47 °C (Current M = 0x870)
+----------------------------------------
+  Temp: 47.3 °C (d=3)
+    P[3] = 0x09F
+    -> Test M=0x870 (Current Code) => R12=0x8EF
+    -> Test M=0x208 (Captured 1 times) => R12=0x297
+
+
+Temp Integer: 48 °C (Current M = 0x84C)
+----------------------------------------
+  Temp: 48.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x84C (Current Code) => R12=0x852
+    -> Test M=0x1EF (Captured 1 times) => R12=0x1F1
+
+
+Temp Integer: 49 °C (Current M = 0x81D)
+----------------------------------------
+  Temp: 49.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x81D (Current Code) => R12=0x842
+    -> Test M=0x1BE (Captured 2 times) => R12=0x1E1
+
+
+Temp Integer: 52 °C (Current M = 0x863)
+----------------------------------------
+  Temp: 52.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x863 (Current Code) => R12=0x83C
+    -> Test M=0x1C0 (Captured 2 times) => R12=0x19F
+
+
+Temp Integer: 56 °C (Current M = 0x000)
+----------------------------------------
+  Temp: 56.5 °C (d=5)
+    P[5] = 0x0C0
+    -> Test M=0x000 (Current Code) => R12=0x0C0
+    -> Test M=0x25E (Captured 1 times) => R12=0x29E
+
+
+Temp Integer: 57 °C (Current M = 0x000)
+----------------------------------------
+  Temp: 57.0 °C (d=0)
+    P[0] = 0x000
+    -> Test M=0x000 (Current Code) => R12=0x000
+    -> Test M=0x1D4 (Captured 1 times) => R12=0x1D4
+
+  Temp: 57.1 °C (d=1)
+    P[1] = 0x075
+    -> Test M=0x000 (Current Code) => R12=0x075
+    -> Test M=0x1D4 (Captured 1 times) => R12=0x1A1
+
+  Temp: 57.9 °C (d=9)
+    P[9] = 0x01E
+    -> Test M=0x000 (Current Code) => R12=0x01E
+    -> Test M=0x1D4 (Captured 1 times) => R12=0x1CA
+
+
+Temp Integer: 58 °C (Current M = 0x000)
+----------------------------------------
+  Temp: 58.6 °C (d=6)
+    P[6] = 0x05F
+    -> Test M=0x000 (Current Code) => R12=0x05F
+    -> Test M=0x233 (Captured 1 times) => R12=0x26C
+
+
+Temp Integer: 61 °C (Current M = 0x000)
+----------------------------------------
+  Temp: 61.4 °C (d=4)
+    P[4] = 0x0B5
+    -> Test M=0x000 (Current Code) => R12=0x0B5
+    -> Test M=0x13A (Captured 1 times) => R12=0x18F
+
+
