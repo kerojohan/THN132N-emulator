@@ -104,15 +104,17 @@ P(8) = P(2) XOR 0x7
 
 ## 📖 Documentació
 
-### Documentació Tècnica
+### Documentació Principal (Carpeta Docs/)
+- **[Docs/METODOLOGIA_DETALLADA.md](Docs/METODOLOGIA_DETALLADA.md)** - Metodologia científica completa
+- **[Docs/Documentació Final.md](Docs/Documentació%20Final.md)** - Document final del projecte
+- **[Docs/Oregon_THN132N_Protocol_Analysis.md](Docs/Oregon_THN132N_Protocol_Analysis.md)** - Anàlisi protocol
+- **[ESTRUCTURA_PROYECTO.md](ESTRUCTURA_PROYECTO.md)** - Mapa complet del projecte
+
+### Documentació Tècnica Detallada
 - **[Docs/README.md](ec40_lut_suite/04_universal_mp_analysis/Docs/README.md)** - Guia tècnica completa
-- **[ESTRUCTURA_PROYECTO.md](ESTRUCTURA_PROYECTO.md)** - Navegació pel projecte
-
-### Documentació Acadèmica
 - **[TESIS_MASTER_COMPLETA.md](ec40_lut_suite/04_universal_mp_analysis/Docs/TESIS_MASTER_COMPLETA.md)** - Treball estil màster (~8,500 paraules)
-- **[METODOLOGIA_DETALLADA.md](ec40_lut_suite/04_universal_mp_analysis/Docs/METODOLOGIA_DETALLADA.md)** - Metodologia científica
 
-### Verificació
+### Verificació i Proves
 - **[verification_table.md](ec40_lut_suite/04_universal_mp_analysis/Docs/verification_table.md)** - 2196 trames verificades
 - **[p_algorithm_tests.md](ec40_lut_suite/04_universal_mp_analysis/Docs/p_algorithm_tests.md)** - >20,000 proves documentades
 
