@@ -82,6 +82,11 @@ P(8) = P(2) XOR 0x7
 ## 📁 Estructura del Projecte
 
 ```
+├── Docs/ 📚
+│   ├── Documentació Final.md
+│   ├── Oregon_THN132N_BAR206.pdf
+│   └── Oregon_THN132N_Protocol_Analysis.md
+│
 ├── esp32/
 │   └── oregon_transmitter_universal.ino    ⭐ GENERADOR ARDUINO
 │
@@ -93,7 +98,8 @@ P(8) = P(2) XOR 0x7
 │       │   ├── TESIS_MASTER_COMPLETA.md       Treball acadèmic
 │       │   ├── METODOLOGIA_DETALLADA.md       Metodologia
 │       │   ├── oregon_p_lut_complete.py       LUT funcional
-│       │   └── verification_table.md          Verificació
+│       │   ├── verification_table.md          Verificació
+│       │   └── p_algorithm_tests.md           >20k proves
 │       └── investigation_scripts/          🔬 Scripts proves (>50)
 │
 ├── README.md                               📖 Aquesta pàgina
@@ -105,14 +111,14 @@ P(8) = P(2) XOR 0x7
 ## 📖 Documentació
 
 ### Documentació Principal (Carpeta Docs/)
-- **[Docs/METODOLOGIA_DETALLADA.md](Docs/METODOLOGIA_DETALLADA.md)** - Metodologia científica completa
 - **[Docs/Documentació Final.md](Docs/Documentació%20Final.md)** - Document final del projecte
 - **[Docs/Oregon_THN132N_Protocol_Analysis.md](Docs/Oregon_THN132N_Protocol_Analysis.md)** - Anàlisi protocol
 - **[ESTRUCTURA_PROYECTO.md](ESTRUCTURA_PROYECTO.md)** - Mapa complet del projecte
 
-### Documentació Tècnica Detallada
+### Documentació Tècnica i Acadèmica
 - **[Docs/README.md](ec40_lut_suite/04_universal_mp_analysis/Docs/README.md)** - Guia tècnica completa
 - **[TESIS_MASTER_COMPLETA.md](ec40_lut_suite/04_universal_mp_analysis/Docs/TESIS_MASTER_COMPLETA.md)** - Treball estil màster (~8,500 paraules)
+- **[METODOLOGIA_DETALLADA.md](ec40_lut_suite/04_universal_mp_analysis/Docs/METODOLOGIA_DETALLADA.md)** - Metodologia científica completa
 
 ### Verificació i Proves
 - **[verification_table.md](ec40_lut_suite/04_universal_mp_analysis/Docs/verification_table.md)** - 2196 trames verificades

@@ -4,11 +4,10 @@
 
 ```
 Antigravity/
-├── Docs/ ⭐ DOCUMENTACIÓ PRINCIPAL
-│   ├── METODOLOGIA_DETALLADA.md           Metodologia científica completa
-│   ├── Documentació Final.md              Document final del projecte
-│   ├── Oregon_THN132N_Protocol_Analysis.md Anàlisi protocol
-│   └── Oregon_THN132N_BAR206.pdf          PDF tècnic BAR206
+├── Docs/ 📚 Documentació general
+│   ├── Documentació Final.md
+│   ├── Oregon_THN132N_BAR206.pdf
+│   └── Oregon_THN132N_Protocol_Analysis.md
 │
 ├── esp32/
 │   ├── oregon_transmitter_universal.ino   ⭐ GENERADOR FINAL ARDUINO
@@ -21,9 +20,10 @@ Antigravity/
 │   │
 │   ├── 📦 SOLUCIÓ FINAL
 │   │   └── 04_universal_mp_analysis/
-│   │       ├── Docs/ ⭐ DOCUMENTACIÓ TÈCNICA
+│   │       ├── Docs/ ⭐ DOCUMENTACIÓ TÈCNICA I ACADÈMICA
 │   │       │   ├── README.md                   Resum executiu tècnic
 │   │       │   ├── TESIS_MASTER_COMPLETA.md    Treball estil màster
+│   │       │   ├── METODOLOGIA_DETALLADA.md    Metodologia científica
 │   │       │   ├── oregon_p_lut_complete.py    LUT Python funcional
 │   │       │   ├── verification_table.md/csv   Verificació completa
 │   │       │   └── p_algorithm_tests.md        Detall >20k proves
@@ -53,20 +53,18 @@ Antigravity/
 
 ### 2. Documentació Principal
 **`Docs/`** - Documentació general del projecte
-- `METODOLOGIA_DETALLADA.md` - Metodologia científica
-- `Documentació Final.md` - Document final
+- `Documentació Final.md` - Document final del projecte
 - `Oregon_THN132N_Protocol_Analysis.md` - Anàlisi protocol
+- `Oregon_THN132N_BAR206.pdf` - PDF tècnic
 
-### 3. Documentació Tècnica
-**`ec40_lut_suite/04_universal_mp_analysis/Docs/README.md`**
-- Explicació de tots els descobriments
-- Fórmules universals R1/M
-- Transformacions XOR de P
-- Instruccions d'ús
-
-**`ec40_lut_suite/04_universal_mp_analysis/Docs/TESIS_MASTER_COMPLETA.md`**
-- Treball acadèmic complet estil màster
-- ~8,500 paraules amb totes les fases
+### 3. Documentació Tècnica i Acadèmica
+**`ec40_lut_suite/04_universal_mp_analysis/Docs/`**
+- `README.md` - Guia tècnica completa
+- `TESIS_MASTER_COMPLETA.md` - Treball estil màster (~8,500 paraules)
+- `METODOLOGIA_DETALLADA.md` - Metodologia científica completa
+- `oregon_p_lut_complete.py` - LUT Python funcional
+- `verification_table.md` - Verificació 2196 trames
+- `p_algorithm_tests.md` - >20,000 proves documentades
 
 ### 3. LUT Python Funcional
 **`ec40_lut_suite/04_universal_mp_analysis/Docs/oregon_p_lut_complete.py`**
