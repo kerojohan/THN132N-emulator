@@ -6,37 +6,28 @@
 Antigravity/
 ├── Docs/ 📚 Documentació general
 │   ├── Documentació Final.md
+│   ├── METODOLOGIA_DETALLADA.md          📖 Metodologia científica
 │   ├── Oregon_THN132N_BAR206.pdf
 │   └── Oregon_THN132N_Protocol_Analysis.md
 │
 ├── esp32/
-│   ├── oregon_transmitter_universal.ino   ⭐ GENERADOR FINAL ARDUINO
-│   └── oregon_transmitter.ino             (versió antiga amb LUTs)
+│   ├── oregon_transmitter_universal.ino  ⭐ GENERADOR FINAL
+│   └── oregon_transmitter.ino            (versió amb LUTs)
 │
 ├── ec40_lut_suite/
-│   ├── 📊 DADES
-│   │   ├── ec40_capturas_merged.csv       ⭐ Dataset complet (2196 trames)
-│   │   └── oregon_p_table_247.h           LUT empírica House 247
+│   ├── ec40_capturas_merged.csv          📊 Dataset (2196 trames)
+│   ├── oregon_p_table_247.h              LUT empírica
 │   │
-│   ├── 📦 SOLUCIÓ FINAL
-│   │   └── 04_universal_mp_analysis/
-│   │       ├── Docs/ ⭐ DOCUMENTACIÓ TÈCNICA I ACADÈMICA
-│   │       │   ├── README.md                   Resum executiu tècnic
-│   │       │   ├── TESIS_MASTER_COMPLETA.md    Treball estil màster
-│   │       │   ├── METODOLOGIA_DETALLADA.md    Metodologia científica
-│   │       │   ├── oregon_p_lut_complete.py    LUT Python funcional
-│   │       │   ├── verification_table.md/csv   Verificació completa
-│   │       │   └── p_algorithm_tests.md        Detall >20k proves
-│   │       │
-│   │       └── 🔬 investigation_scripts/
-│   │           ├── README.md                Scripts de proves
-│   │           ├── analyze_*.py             Scripts anàlisi
-│   │           ├── solve_*.py               Proves algorismes
-│   │           └── verify_*.py              Verificacions
-│   │
-│   └── 📚 DOCUMENTACIÓ HISTÒRICA
-│       └── 05_documentation/
-│           └── ... (documents històrics)
+│   └── 04_universal_mp_analysis/
+│       ├── Docs/ ⭐ DOCUMENTACIÓ TÈCNICA
+│       │   ├── README.md                 Guia tècnica
+│       │   ├── oregon_p_lut_complete.py  LUT funcional
+│       │   ├── verification_table.md     Verificació
+│       │   ├── verification_table.csv    Dades verificació
+│       │   └── p_algorithm_tests.md      >20k proves
+│       │
+│       └── investigation_scripts/        🔬 Scripts proves
+│           └── README.md
 │
 ├── README.md ⭐ INICI AQUÍ
 └── ESTRUCTURA_PROYECTO.md (aquest document)
@@ -51,22 +42,19 @@ Antigravity/
 - Transformacions XOR per rolling codes
 - 86.79% precisió verificada
 
-### 2. Documentació Principal
-**`Docs/`** - Documentació general del projecte
+### 2. Documentació General
+**`Docs/`** - Carpeta arrel
 - `Documentació Final.md` - Document final del projecte
+- `METODOLOGIA_DETALLADA.md` - Metodologia científica completa
 - `Oregon_THN132N_Protocol_Analysis.md` - Anàlisi protocol
 - `Oregon_THN132N_BAR206.pdf` - PDF tècnic
 
-### 3. Documentació Tècnica i Acadèmica
+### 3. Documentació Tècnica
 **`ec40_lut_suite/04_universal_mp_analysis/Docs/`**
 - `README.md` - Guia tècnica completa
-- `TESIS_MASTER_COMPLETA.md` - Treball estil màster (~8,500 paraules)
-- `METODOLOGIA_DETALLADA.md` - Metodologia científica completa
 - `oregon_p_lut_complete.py` - LUT Python funcional
-- `verification_table.md` - Verificació 2196 trames
+- `verification_table.md/.csv` - Verificació 2196 trames
 - `p_algorithm_tests.md` - >20,000 proves documentades
-
-### 3. LUT Python Funcional
 **`ec40_lut_suite/04_universal_mp_analysis/Docs/oregon_p_lut_complete.py`**
 - LUT completa de P (405 punts)
 - Funció `get_p(temp_celsius, nib7)`
