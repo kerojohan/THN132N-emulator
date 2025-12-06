@@ -5,10 +5,6 @@
  * - Construye payload EC40 (post-reflect) con tus tablas P y M
  * - Genera RAW OS v2.1 (header + Manchester) en un array de bits
  * - Envía por 433 MHz usando un pin digital -> OOK (bit 1 = HIGH, bit 0 = LOW)
- *
- * NOTA:
- *  - Esto está pensado para Arduino + ATTinyCore.
- *  - Más adelante se puede añadir deep sleep y watchdog.
  */
 
 #include <Arduino.h>
@@ -24,9 +20,10 @@ const uint8_t ONEWIRE_PIN  = 2;   // PB2 -> DS18B20 DQ
 // Periodo entre emisiones (segundos)
 const uint32_t PERIOD_SEC = 40;
 
-// Tiempo semibit (µs) para OOK Oregon V2.1 (ajustado según sensor real)
-// Sensor real: ~984µs HIGH, ~964µs LOW → promedio ~974µs → semibit ~487µs
-const uint16_t T_UNIT_US = 488;
+// Tiempo semibit (µs) para OOK Oregon V2.1
+// Sensor real: ~488µs.
+// Ajuste ATtiny85: 480µs para compensar overhead de digitalWrite y bucles
+// const uint16_t T_UNIT_US = 480;
 
 // ---------------------------------------------------------------------------
 // OneWire para DS18B20
@@ -35,11 +32,14 @@ const uint16_t T_UNIT_US = 488;
 OneWire ds(ONEWIRE_PIN);
 
 // ---------------------------------------------------------------------------
-// TABLAS P[d] y M[e] (ya validadas, con el fix de 10.0 ºC -> M[10] = 0x100)
+// TABLAS P[d] y M[e] (House 247, Nib7=0x2)
 // ---------------------------------------------------------------------------
+// Método correcto: R12 = P[d] XOR M[e]
+// Estas son las tablas completas para House Code 247
+// NOTA: Movemos a RAM para evitar problemas con pgm_read_word en ATtiny
 
 // P[d] para d = 0..9
-const uint16_t P_TABLE[10] PROGMEM = {
+const uint16_t P_TABLE[10] = {
   0x000, 0x075, 0x0EA, 0x09F, 0x0B5,
   0x0C0, 0x05F, 0x02A, 0x06B, 0x01E
 };
@@ -48,7 +48,7 @@ const uint16_t P_TABLE[10] PROGMEM = {
 const int8_t  M_MIN_E = -16;
 const int8_t  M_MAX_E =  54;
 
-const uint16_t M_TABLE[71] PROGMEM = {
+const uint16_t M_TABLE[71] = {
   0x2A1, 0x252, 0x203, 0x2B5, 0x2E4, 0x217, 0x246, 0x29A, // -16..-9
   0x2CB, 0x2F7, 0x2A6, 0x255, 0x204, 0x2B2, 0x2E3, 0x210, // -8..-1
   0x2C2, 0x148, 0x1BB, 0x1EA, 0x15C, 0x10D, 0x1FE, 0x1AF, // 0..7
@@ -145,8 +145,8 @@ uint16_t calc_R12(float temp_c)
   if (d < 0)       d = 0;
   if (d > 9)       d = 9;
 
-  uint16_t P = pgm_read_word(&P_TABLE[d]);
-  uint16_t M = pgm_read_word(&M_TABLE[e - M_MIN_E]);
+  uint16_t P = P_TABLE[d];
+  uint16_t M = M_TABLE[e - M_MIN_E];
   return (P ^ M) & 0x0FFF;
 }
 
@@ -279,47 +279,61 @@ void build_osv21_bits_from_ec40_post(const uint8_t ec40_post[8],
   // idx debería ser 168
 }
 
+// Tiempo semibit (µs) para OOK Oregon V2.1
+// Sensor real: ~488µs.
+const uint16_t T_UNIT_US = 488;
+
 // ---------------------------------------------------------------------------
 // Envío físico: bitstream OS v2.1 -> OOK en RF_PIN
 // ---------------------------------------------------------------------------
 
 void send_bits_ook(const uint8_t *bits, int n_bits)
 {
+  // Deshabilitar interrupciones para timing preciso
+  noInterrupts();
+  
+  // Pre-calcular máscaras para manipulación directa de puertos (más rápido que digitalWrite)
+  // RF_PIN es 0 (PB0)
+  const uint8_t PORT_MASK = (1 << RF_PIN);
+  
   for (int i = 0; i < n_bits; ++i) {
     if (bits[i]) {
       // 1 -> HIGH luego LOW
-      digitalWrite(RF_PIN, HIGH);
+      PORTB |= PORT_MASK;   // HIGH
       delayMicroseconds(T_UNIT_US);
-      digitalWrite(RF_PIN, LOW);
+      PORTB &= ~PORT_MASK;  // LOW
       delayMicroseconds(T_UNIT_US);
     } else {
       // 0 -> LOW luego HIGH
-      digitalWrite(RF_PIN, LOW);
+      PORTB &= ~PORT_MASK;  // LOW
       delayMicroseconds(T_UNIT_US);
-      digitalWrite(RF_PIN, HIGH);
+      PORTB |= PORT_MASK;   // HIGH
       delayMicroseconds(T_UNIT_US);
     }
   }
   // IMPORTANTE: Asegurar que terminamos con RF en LOW
-  digitalWrite(RF_PIN, LOW);
+  PORTB &= ~PORT_MASK;
+  
+  // Habilitar interrupciones de nuevo
+  interrupts();
 }
 
-// Envía una trama EC40 post-reflect por RF (2 veces, como el sensor real)
+// Envía una trama EC40 post-reflect por RF (4 veces, como el sensor real)
 void sendOregonFrame(const uint8_t ec40_post[8])
 {
   uint8_t bits[168];
   build_osv21_bits_from_ec40_post(ec40_post, bits);
 
-  // Primera ráfaga (~164 ms con T_UNIT=488µs)
-  send_bits_ook(bits, 168);
+  // Gap inicial (important per sincronització del receptor)
+  delay(10);
 
-  // Gap entre ráfagas: ~8.8 ms (como el sensor real THN132N)
-  // Sensor real: ~8788 µs. Compensamos overhead del código (~520µs)
-  // Delay ajustado: 8300µs → gap real ≈ 8800µs
-  delayMicroseconds(4096);
-
-  // Segunda ráfaga (~164 ms)
-  send_bits_ook(bits, 168);
+  // Transmetre 4 vegades amb gap de 10ms (estàndard Oregon)
+  for (int i = 0; i < 4; i++) {
+    send_bits_ook(bits, 168);
+    if (i < 3) {  // No fer delay després de l'última transmissió
+      delayMicroseconds(11000);  // 11ms (un pelín más relajado)
+    }
+  }
 }
 
 // ---------------------------------------------------------------------------
