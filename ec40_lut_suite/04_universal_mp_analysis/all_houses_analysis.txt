@@ -1,0 +1,30 @@
+ANÀLISI COMPLET DE TOTS ELS HOUSE IDs
+================================================================================
+
+Total Houses: 28
+Houses amb XOR constant: 3
+
+Houses amb XOR constant:
+  247 (base)
+  3 (XOR 0x0, n=35)
+  96 (XOR 0x0, n=13)
+
+Houses amb XOR variable:
+  18 (XOR més comú: 0x7, n=9)
+  39 (XOR més comú: 0x9, n=7)
+  53 (XOR més comú: 0x7, n=11)
+  71 (XOR més comú: 0x7, n=6)
+  73 (XOR més comú: 0x7, n=6)
+  95 (XOR més comú: 0x7, n=34)
+  121 (XOR més comú: 0x7, n=43)
+  124 (XOR més comú: 0x7, n=39)
+  131 (XOR més comú: 0xA, n=10)
+  132 (XOR més comú: 0x7, n=6)
+  151 (XOR més comú: 0x7, n=4)
+  155 (XOR més comú: 0x7, n=5)
+  173 (XOR més comú: 0x9, n=33)
+  184 (XOR més comú: 0x4, n=13)
+  187 (XOR més comú: 0x7, n=24)
+  205 (XOR més comú: 0x7, n=30)
+  232 (XOR més comú: 0x9, n=27)
+  255 (XOR més comú: 0x0, n=18)
