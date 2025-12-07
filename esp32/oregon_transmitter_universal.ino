@@ -277,10 +277,10 @@ void sendOregonFrame(float temp_c, uint8_t channel, uint8_t device_id, uint8_t n
   // Gap inicial (important per sincronització del receptor)
   delay(10);
   
-  // Transmetre 4 vegades amb gap de 10ms (estàndard Oregon)
-  for (int i = 0; i < 4; i++) {
+  // Transmetre 2 vegades amb gap de 10ms (estàndard Oregon)
+  for (int i = 0; i < 2; i++) {
     rmt_write_items(RMT_CH, items, item_len, true);
-    if (i < 3) {  // No fer delay després de l'última transmissió
+    if (i < 1) {  // No fer delay després de l'última transmissió
       delay(10);  // 10ms entre repeticions
     }
   }

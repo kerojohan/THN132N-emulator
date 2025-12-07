@@ -327,13 +327,62 @@ void sendOregonFrame(const uint8_t ec40_post[8])
   // Gap inicial (important per sincronització del receptor)
   delay(10);
 
-  // Transmetre 4 vegades amb gap de 10ms (estàndard Oregon)
-  for (int i = 0; i < 4; i++) {
+  // Transmetre 2 vegades amb gap de 10ms (estàndard Oregon)
+  for (int i = 0; i < 2; i++) {
     send_bits_ook(bits, 168);
-    if (i < 3) {  // No fer delay després de l'última transmissió
+    if (i < 1) {  // No fer delay després de l'última transmissió
       delayMicroseconds(11000);  // 11ms (un pelín más relajado)
     }
   }
+}
+
+// ---------------------------------------------------------------------------
+// GESTIÓN DE ENERGÍA (DEEP SLEEP)
+// ---------------------------------------------------------------------------
+#include <avr/sleep.h>
+#include <avr/wdt.h>
+#include <avr/interrupt.h>
+
+// Variable volátil para contar ciclos de WDT
+volatile uint8_t wdt_cycles = 0;
+
+// ISR del Watchdog
+ISR(WDT_vect) {
+  wdt_cycles++;
+}
+
+// Configurar Watchdog para interrupción cada 8 segundos
+void setup_watchdog() {
+  cli(); // Deshabilitar interrupciones
+  wdt_reset();
+  
+  // Secuencia para cambiar configuración WDT
+  // WDTIE: Interrupt Enable, WDP3:0 = 1001 (8s)
+  MCUSR &= ~(1 << WDRF); // Limpiar flag de reset
+  WDTCR |= (1 << WDCE) | (1 << WDE); // Habilitar cambios
+  WDTCR = (1 << WDIE) | (1 << WDP3) | (1 << WDP0); // Modo interrupción, 8s
+  
+  sei(); // Habilitar interrupciones
+}
+
+// Poner en modo sleep profundo
+void enter_sleep() {
+  // Deshabilitar ADC para ahorrar energía (~230uA)
+  ADCSRA &= ~(1 << ADEN);
+  
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+  sleep_enable();
+  
+  // Asegurar que el pin RF está LOW antes de dormir
+  PORTB &= ~(1 << RF_PIN);
+  
+  sleep_mode(); // Dormir aquí hasta interrupción WDT
+  
+  // Al despertar...
+  sleep_disable();
+  
+  // Re-habilitar ADC si fuera necesario (aquí no lo usamos directamente, OneWire lo gestiona)
+  // ADCSRA |= (1 << ADEN); 
 }
 
 // ---------------------------------------------------------------------------
@@ -342,36 +391,40 @@ void sendOregonFrame(const uint8_t ec40_post[8])
 
 void setup()
 {
+  // Configurar pines
   pinMode(RF_PIN, OUTPUT);
   digitalWrite(RF_PIN, LOW);
-
-  // En ATtiny normalmente no usas Serial, pero lo dejo comentado:
-  // Serial.begin(9600);
+  
+  // Configurar Watchdog
+  setup_watchdog();
 }
 
 void loop()
 {
-  static uint32_t last_ms = 0;
-  static float last_valid_temp = 20.0; // Temperatura por defecto
-  uint32_t now = millis();
-
-  if (now - last_ms >= PERIOD_SEC * 1000UL) {
-    last_ms = now;
-
+  // 40 segundos = 5 ciclos de 8 segundos
+  if (wdt_cycles >= 5) {
+    wdt_cycles = 0; // Reset contador
+    
+    // 1. Leer temperatura
     float tempC;
+    static float last_valid_temp = 20.0;
+    
+    // Habilitar interrupciones para OneWire (timing crítico)
+    // OneWire usa cli()/sei() internamente, pero nos aseguramos
+    
     if (readDS18B20(tempC)) {
-      // Si leemos correctamente, guardamos la temperatura
       tempC = roundf(tempC * 10.0f) / 10.0f;
       last_valid_temp = tempC;
     } else {
-      // Si falla el DS18B20, usar la última válida
       tempC = last_valid_temp;
     }
 
+    // 2. Construir y enviar trama
     uint8_t ec40[8];
     build_ec40_post(tempC, g_channel, g_device_id, ec40);
-
-    // SIEMPRE transmitir, incluso si el sensor falló
     sendOregonFrame(ec40);
   }
+  
+  // Entrar en modo sleep hasta el siguiente tick del WDT (8s)
+  enter_sleep();
 }
