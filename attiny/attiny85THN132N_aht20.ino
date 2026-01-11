@@ -41,11 +41,53 @@ const uint8_t SCL_PIN = 0;  // PB0 AHT20 SCL
 #define LED_OFF LOW
 
 // Oregon Parameters
-const uint8_t g_channel   = 1;
-const uint8_t g_device_id = 43;   // CLONADO: House code 43 (0x2B) del original
+const uint8_t g_channel   = 4;  // Channel 3 (1=Ch1, 2=Ch2, 4=Ch3)
 
-// ---------------------------------------------------------------------------
-// TIMINGS RF (CLAVE PARA BAR206)
+// ... (existing code)
+
+void loop() {
+  // Ajuste para CANAL 3 (Ahorro Máximo):
+  // El Canal 3 requiere un intervalo de ~43 segundos.
+  // Sabemos por pruebas anteriores que 10 ciclos WDT = ~43s reales.
+  // Esto es PERFECTO porque nos permite dormir el 100% del tiempo
+  // sin usar 'safe_delay' activo, minimizando el consumo de batería.
+  if (wdt_cycles >= 10) {
+    wdt_cycles = 0;
+
+    float tempC = 0.0f;
+    static float last_valid_temp = 0.0f;
+
+    bool success = aht20_read(tempC);
+    if (!success) {
+      delay(50);
+      aht20_init_sensor();
+      delay(50);
+      success = aht20_read(tempC);
+    }
+
+    if (success) {
+      tempC = roundf(tempC * 10.0f) / 10.0f;
+      last_valid_temp = tempC;
+    } else {
+      pinMode(LED_PIN, OUTPUT);
+      for (int i = 0; i < 5; i++) {
+        digitalWrite(LED_PIN, LED_ON);  delay(100);
+        digitalWrite(LED_PIN, LED_OFF); delay(100);
+      }
+      tempC = last_valid_temp;
+    }
+
+    uint8_t ec40[8];
+    build_ec40_post(tempC, g_channel, g_device_id, ec40);
+    
+    // Sin retardo activo: 10 ciclos de sueño puro cubren los 43s.
+    // Máxima eficiencia energética.
+    
+    sendOregonFrame(ec40);
+  }
+
+  enter_sleep();
+}
 // ---------------------------------------------------------------------------
 // Ajustes finales para ID 43 (Clonado):
 // Pulse: 528us -> Target 524us (-4.0). Correction: 504 - 4 = 500.
@@ -405,9 +447,22 @@ void setup() {
   setup_watchdog();
 }
 
+// Helper to delay without WDT timeout/overlap
+void safe_delay(unsigned long ms) {
+  unsigned long start = millis();
+  while (millis() - start < ms) {
+    wdt_reset();
+  }
+}
+
 void loop() {
-  // ~39s aprox (depende del WDT real)
-  if (wdt_cycles >= 9) {
+  // Ajuste Preciso (Math verified from logs):
+  // 1 ciclo WDT real = ~4.22s (derivado de 9 ciclos = 38s).
+  // 8 ciclos = 8 * 4.22 = 33.76s.
+  // Target = 39.00s.
+  // Faltan = 5.24s (5240ms).
+  // Usamos safe_delay para NO incrementar wdt_cycles durante el retardo.
+  if (wdt_cycles >= 8) {
     wdt_cycles = 0;
 
     float tempC = 0.0f;
@@ -436,10 +491,11 @@ void loop() {
     uint8_t ec40[8];
     build_ec40_post(tempC, g_channel, g_device_id, ec40);
     
-    // Ajuste fino de intervalo: 
-    // 9 ciclos WDT = ~38s. Original = ~39s.
-    // Añadimos 1000ms de retardo activo para cuadrar la ventana.
-    delay(1000);
+    // Ajuste Final (Realidad vs Teoría):
+    // Con 5240ms obtuvimos 40s reales.
+    // Queremos 39s. Restamos 1000ms.
+    // Nuevo delay: 5240 - 1000 = 4240ms.
+    safe_delay(4240);
     
     sendOregonFrame(ec40);
   }
