@@ -51,11 +51,16 @@ const uint8_t g_device_id = 43;   // CLONADO: House code 43 (0x2B) del original
 // Pulse: 528us -> Target 524us (-4.0). Correction: 504 - 4 = 500.
 // Gap: 432us -> Target 444us (+12.0). Correction: 456 + 12 = 468.
 // Frame Gap: 9220us -> Target 8756us (-464). Correction: 8200 - 460 = 7740.
-const uint16_t HIGH_UNIT_US = 500;
-const uint16_t LOW_UNIT_US  = 468;
+// NUEVO AJUSTE (Retuning para Sensor Original HC 200 - Iteración 5 [FINAL]):
+// Ref Original: High 492, Low 476, Gap 8784.
+// High: Target 492. Medido 492 (PERFECTO). Config: 458.
+// Low:  Target 476. Medido 484 (+8). Config: 512 (Interpolado 510/516).
+// Gap:  Target 8784. Medido 8780 (-4). Config: 8184 + 4 = 8188.
+const uint16_t HIGH_UNIT_US = 458;
+const uint16_t LOW_UNIT_US  = 512;
 
 // Gap “largo” entre tramas duplicadas
-const uint16_t INTER_FRAME_GAP_US = 7740;
+const uint16_t INTER_FRAME_GAP_US = 8200;
 
 // ---------------------------------------------------------------------------
 // TABLAS P[d] y M[e] (House 247)
@@ -430,6 +435,12 @@ void loop() {
 
     uint8_t ec40[8];
     build_ec40_post(tempC, g_channel, g_device_id, ec40);
+    
+    // Ajuste fino de intervalo: 
+    // 9 ciclos WDT = ~38s. Original = ~39s.
+    // Añadimos 1000ms de retardo activo para cuadrar la ventana.
+    delay(1000);
+    
     sendOregonFrame(ec40);
   }
 
