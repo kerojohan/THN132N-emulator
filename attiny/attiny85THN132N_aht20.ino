@@ -44,12 +44,12 @@ const uint8_t SCL_PIN = 0;  // PB0 AHT20 SCL
 const uint8_t g_channel   = 1;  // Channel 3 (1=Ch1, 2=Ch2, 4=Ch3)
 const uint8_t g_device_id = 131;   // CLONADO: ID del sensor original
 // ---------------------------------------------------------------------------
-// Ajustes finales para Clonado Perfecto (Target: 500 / 464 / 9232):
-const uint16_t HIGH_UNIT_US = 470;
-const uint16_t LOW_UNIT_US  = 499;
+// Ajustes finales para BATERÍA EXTERNA (Target: 512 / 456 / 9248):
+const uint16_t HIGH_UNIT_US = 507;
+const uint16_t LOW_UNIT_US  = 469;
 
 // Gap “largo” entre tramas duplicadas
-const uint16_t INTER_FRAME_GAP_US = 8252;
+const uint16_t INTER_FRAME_GAP_US = 8764;
 
 // ---------------------------------------------------------------------------
 // TABLAS P[d] y M[e] (House 247)
