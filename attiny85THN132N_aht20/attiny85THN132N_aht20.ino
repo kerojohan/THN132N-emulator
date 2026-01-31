@@ -44,12 +44,16 @@
  const uint8_t g_channel   = 1;  // Channel 3 (1=Ch1, 2=Ch2, 4=Ch3)
  const uint8_t g_device_id = 131;   // CLONADO: ID del sensor original
  // ---------------------------------------------------------------------------
- // Ajustes finales para BATERÍA EXTERNA (Target: 512 / 456 / 9248):
-const uint16_t HIGH_UNIT_US = 489;
-const uint16_t LOW_UNIT_US  = 430;
+// Ajustes finales para BATERÍA EXTERNA (Target: 512 / 456 / 9248):
+// Validados: supera fase de sincronización del monitor (tramas estables)
+const uint16_t HIGH_UNIT_US = 441;
+const uint16_t LOW_UNIT_US  = 473;
  
  // Gap “largo” entre tramas duplicadas
-const uint16_t INTER_FRAME_GAP_US = 7750;
+const uint16_t INTER_FRAME_GAP_US = 8240;
+
+// Nominal supply used to derive timing (mV)
+const uint16_t VCC_NOMINAL_MV = 5000;
  
  
  // ---------------------------------------------------------------------------
@@ -77,11 +81,37 @@ const uint16_t INTER_FRAME_GAP_US = 7750;
  // ---------------------------------------------------------------------------
  // SOFT I2C
  // ---------------------------------------------------------------------------
- void i2c_init() {
-   pinMode(SDA_PIN, INPUT_PULLUP);
-   pinMode(SCL_PIN, INPUT_PULLUP);
- }
- 
+void i2c_init() {
+  pinMode(SDA_PIN, INPUT_PULLUP);
+  pinMode(SCL_PIN, INPUT_PULLUP);
+}
+
+// ---------------------------------------------------------------------------
+// VCC MEASUREMENT (bandgap) + timing scaling
+// ---------------------------------------------------------------------------
+uint16_t read_vcc_mv() {
+  // Measure Vcc using the internal 1.1V bandgap.
+  ADMUX = _BV(MUX3) | _BV(MUX2); // 1.1V (Vbg) against Vcc
+  delay(2);
+  ADCSRA |= _BV(ADSC);
+  while (ADCSRA & _BV(ADSC)) { }
+  uint16_t adc = (uint16_t)ADC;
+  if (adc == 0) return VCC_NOMINAL_MV;
+  // Vcc (mV) = 1.1V * 1024 * 1000 / adc
+  uint32_t vcc = (1100UL * 1024UL) / adc;
+  return (uint16_t)vcc;
+}
+
+// Scale timings using Vcc ratio (nominal / measured)
+void get_scaled_timings(uint16_t &high_us, uint16_t &low_us, uint16_t &gap_us) {
+  uint16_t vcc_mv = read_vcc_mv();
+  // Fixed-point scale (Q16)
+  uint32_t scale_q16 = ((uint32_t)VCC_NOMINAL_MV << 16) / (uint32_t)vcc_mv;
+  high_us = (uint16_t)((((uint32_t)HIGH_UNIT_US * scale_q16) + 0x8000) >> 16);
+  low_us  = (uint16_t)((((uint32_t)LOW_UNIT_US  * scale_q16) + 0x8000) >> 16);
+  gap_us  = (uint16_t)((((uint32_t)INTER_FRAME_GAP_US * scale_q16) + 0x8000) >> 16);
+}
+
  void i2c_start() {
    pinMode(SDA_PIN, OUTPUT);
    digitalWrite(SDA_PIN, LOW);
@@ -311,12 +341,12 @@ const uint16_t INTER_FRAME_GAP_US = 7750;
  // ---------------------------------------------------------------------------
  // RF TRANSMISSION
  // ---------------------------------------------------------------------------
- static inline void rf_high_low(uint16_t high_us, uint16_t low_us) {
-   PORTB |=  (1 << RF_PIN);
-   delayMicroseconds(high_us);
-   PORTB &= ~(1 << RF_PIN);
-   delayMicroseconds(low_us);
- }
+static inline void rf_high_low(uint16_t high_us, uint16_t low_us) {
+  PORTB |=  (1 << RF_PIN);
+  delayMicroseconds(high_us);
+  PORTB &= ~(1 << RF_PIN);
+  delayMicroseconds(low_us);
+}
  
  static inline void rf_low_high(uint16_t low_us, uint16_t high_us) {
    PORTB &= ~(1 << RF_PIN);
@@ -325,32 +355,36 @@ const uint16_t INTER_FRAME_GAP_US = 7750;
    delayMicroseconds(high_us);
  }
  
- void send_bits_ook(const uint8_t *bits, int n_bits) {
-   noInterrupts();
-   for (int i = 0; i < n_bits; ++i) {
-     if (bits[i]) {
-       // 1: HIGH luego LOW (asimétrico)
-       rf_high_low(HIGH_UNIT_US, LOW_UNIT_US);
-     } else {
-       // 0: LOW luego HIGH (asimétrico)
-       rf_low_high(LOW_UNIT_US, HIGH_UNIT_US);
-     }
-   }
-   PORTB &= ~(1 << RF_PIN);
-   interrupts();
- }
- 
- void sendOregonFrame(const uint8_t ec40_post[8]) {
+void send_bits_ook(const uint8_t *bits, int n_bits) {
+  uint16_t high_us, low_us, gap_us;
+  get_scaled_timings(high_us, low_us, gap_us);
+  noInterrupts();
+  for (int i = 0; i < n_bits; ++i) {
+    if (bits[i]) {
+      // 1: HIGH luego LOW (asimétrico)
+      rf_high_low(high_us, low_us);
+    } else {
+      // 0: LOW luego HIGH (asimétrico)
+      rf_low_high(low_us, high_us);
+    }
+  }
+  PORTB &= ~(1 << RF_PIN);
+  interrupts();
+}
+
+void sendOregonFrame(const uint8_t ec40_post[8]) {
    pinMode(LED_PIN, OUTPUT);
    digitalWrite(LED_PIN, LED_ON);
  
-   uint8_t bits[168];
-   build_osv21_bits_from_ec40_post(ec40_post, bits);
- 
-   // Como el original: 2 tramas
-   send_bits_ook(bits, 168);
-   delayMicroseconds(INTER_FRAME_GAP_US);
-   send_bits_ook(bits, 168);
+  uint8_t bits[168];
+  build_osv21_bits_from_ec40_post(ec40_post, bits);
+
+  // Como el original: 2 tramas
+  uint16_t high_us, low_us, gap_us;
+  get_scaled_timings(high_us, low_us, gap_us);
+  send_bits_ook(bits, 168);
+  delayMicroseconds(gap_us);
+  send_bits_ook(bits, 168);
  
    digitalWrite(LED_PIN, LED_OFF);
    if (LED_PIN == SCL_PIN) pinMode(LED_PIN, INPUT_PULLUP);
