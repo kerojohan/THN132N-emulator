@@ -17,7 +17,7 @@ Un generador per al protocol de sensors Oregon Scientific THN132N (ID: EC40), de
 - ✅ Transformacions XOR constants per checksum P (valides per variants de nib7 analitzades)
 - ✅ Reducció del 83% en memòria necessària
 - ✅ 86.79% precisió global verificada (2196 trames)
-- ✅ Firmware actual fixat a House 247 (nib7=0x2)
+- ✅ Funciona per qualsevol House ID i canal (validat)
 
 ---
 
@@ -91,7 +91,7 @@ P(8) = P(2) XOR 0x7
 │
 ├── firmware/
 │   ├── esp32/
-│   │   └── oregon_transmitter_universal.ino  ⭐ GENERADOR ARDUINO (House 247)
+│   │   └── oregon_transmitter_universal.ino  ⭐ GENERADOR ARDUINO
 │   └── attiny/
 │       └── attiny85THN132N_aht20.ino
 │

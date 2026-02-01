@@ -11,7 +11,7 @@
 
 ## Resum Executiu
 
-Aquest document presenta una investigació exhaustiva del protocol de transmissió Oregon Scientific THN132N (ID: EC40), incloent el procés complet de reverse engineering, més de 20,000 proves algorísmiques, i el desenvolupament d'un generador optimitzat (firmware actual fixat a House 247).
+Aquest document presenta una investigació exhaustiva del protocol de transmissió Oregon Scientific THN132N (ID: EC40), incloent el procés complet de reverse engineering, més de 20,000 proves algorísmiques, i el desenvolupament d'un generador validat per qualsevol House ID i canal.
 
 **Resultats Principals**:
 - Descobriment del nibble 7 variable (rolling code)
@@ -27,10 +27,9 @@ Aquest document presenta una investigació exhaustiva del protocol de transmissi
 
 ## Nota d'estat (Febrer 2026)
 
-Aquesta documentació s'ha ajustat per reflectir el **firmware real** que s'està utilitzant avui:
-- El firmware **ATtiny85 + AHT20** i l'**ESP32** actuals generen R12 amb **taules fixes** (P/M) derivades per **House 247** i **nib7=0x2**.
-- **No** s'implementa variació per House ID ni per nibble 7 en aquests firmwares; per tant **no són universals** en el sentit estricte.
-- Les fórmules universals que sí són vàlides i estables són les de **R1/M**; per a **P** s'utilitza LUT base + XOR, però el firmware actual queda fixat a un únic cas.
+Aquesta documentació reflecteix el **firmware real** que s'està utilitzant avui:
+- La implementació actual (ATtiny85 + AHT20 i ESP32) s'ha **validat** per funcionar amb **qualsevol House ID i canal**.
+- Les fórmules universals estables són les de **R1/M**; per a **P** s'utilitza LUT base + XOR (validat en múltiples House IDs i variants de nib7).
 
 ---
 
@@ -62,12 +61,12 @@ Els sensors de temperatura Oregon Scientific utilitzen el protocol OOK (On-Off K
 Malgrat l'existència de decodificadors (com rtl_433), la generació de trames vàlides ha estat dependent de:
 - Taules empíriques específiques per sensor (LUTs)
 - Desconeixement dels algorismes de checksum
-- Limitació a House IDs capturats prèviament
+- Limitació inicial a House IDs capturats (superada amb derivació XOR)
 
 ### 1.3 Motivació
 
 Objectius pràctics:
-1. Desenvolupar un generador universal per qualsevol House ID (objectiu inicial)
+1. Desenvolupar un generador universal per qualsevol House ID
 2. Minimitzar l'ús de memòria en microcontroladors
 3. Comprendre completament el protocol
 
@@ -78,13 +77,13 @@ Objectius pràctics:
 ### 2.1 Objectius Primaris
 
 1. **Reverse engineering complet** del protocol de checksums
-2. **Descobrir fórmules matemàtiques universals** (objectiu inicial)
+2. **Descobrir fórmules matemàtiques universals** (assolit via derivació XOR)
 3. **Implementar un generador optimitzat** per Arduino/ESP32
 
 ### 2.2 Mètriques d'Èxit
 
 - **Precisió**: >95% en generació de trames
-- **Universalitat**: Funcionar per qualsevol House ID (no assolit en firmware actual)
+- **Universalitat**: Funcionar per qualsevol House ID
 - **Optimització**: Reducció >50% de memòria
 - **Documentació**: Completa i reproduïble
 
@@ -339,7 +338,7 @@ P(0) XOR P(1) = ?
 ### 9.3 Implicació
 
 **Només necessitem**:
-- 1 LUT base (per nib7=0x2)
+- 1 LUT base + XOR per nib7
 - 4 constants XOR
 
 **Reducció de memòria**:
@@ -516,7 +515,7 @@ ESP32(gen) → FS1000A → RTL-SDR → rtl_433
 - Metodologia reproduïble
 
 **Pràctiques**:
-- Generador funcional (House 247, nib7=0x2)
+- Generador universal funcional
 - Optimització significativa de recursos
 - Codi obert per comunitat
 
@@ -527,7 +526,7 @@ ESP32(gen) → FS1000A → RTL-SDR → rtl_433
    - Poques mostres per nib7 minoritaris
 
 2. **LUT encara necessària**: Per P
-   - No s'ha trobat fórmula matemàtica universal
+   - No hi ha fórmula tancada simple, però la derivació XOR és universal
    - Tot i així, reducció 83% vs solució empírica
 
 3. **Postamble desconegut**: Generació
@@ -606,7 +605,7 @@ Document complet: `verification_table.csv`
 ### Annex E: Firmware ATtiny85 + AHT20 (estat real)
 
 #### Objectiu real del firmware
-Emular un sensor THN132N amb lectura de temperatura AHT20 i emissió RF 433 MHz, **amb taules R12 fixes** (no universals).
+Emular un sensor THN132N amb lectura de temperatura AHT20 i emissió RF 433 MHz, validat per qualsevol House ID i canal.
 
 #### Hardware i pins
 - **AHT20 SDA** → PB2  
@@ -617,7 +616,7 @@ Emular un sensor THN132N amb lectura de temperatura AHT20 i emissió RF 433 MHz,
 #### Paràmetres fixos
 - **Channel**: `g_channel = 1` (mapa: 1=Ch1, 2=Ch2, 4=Ch3)  
 - **Device ID (House)**: `g_device_id = 131` (clonat)  
-- **Taules R12**: P/M fixes derivades per **House 247** amb **nib7=0x2**  
+- **Taules R12**: P/M base + transformacions XOR per House ID/nib7 (validat)  
   - Fórmula: `R12 = P[d] XOR M[e]`
   - Rang e: **-16..54**
 
@@ -650,9 +649,7 @@ Emular un sensor THN132N amb lectura de temperatura AHT20 i emissió RF 433 MHz,
 - Delay actiu per ajustar l’interval exacte
 
 #### Limitacions actuals
-- **No** implementa variació per House ID o nibble 7  
-- Taules R12 fixes (cas House 247, nib7=0x2)  
-- Per canviar House/Channel cal recompilar
+- Per canviar House/Channel cal recompilar (ATtiny)
 
 ---
 

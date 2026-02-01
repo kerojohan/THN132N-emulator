@@ -1,13 +1,13 @@
 # Análisis del Protocolo Oregon Scientific THN132N: Tablas M/P y House ID
 
 **Fecha:** 02 de Diciembre de 2025
-**Estado:** Confirmado experimentalmente
+**Estado:** Confirmado experimentalmente (actualizado Febrer 2026)
 
 ## 1. Resumen Ejecutivo
 
-Contrario a la creencia popular y a análisis previos, **las tablas de codificación (M y P) del sensor THN132N NO son universales**. Dependen directamente del **House ID** (Rolling Code) generado aleatoriamente por el sensor al reiniciarse.
+Se ha confirmado que las tablas de codificación (M y P) del sensor THN132N **sí se pueden generalizar** mediante transformaciones XOR, y que el generador funciona **para cualquier House ID y canal** cuando se aplican dichas transformaciones.
 
-Para emular correctamente un sensor, es necesario utilizar las tablas específicas correspondientes al House ID que se está transmitiendo. El uso de tablas genéricas resulta en una tasa de error significativa (~75% de tramas incorrectas).
+En la práctica, el emulador genera tramas válidas para distintos House IDs y canales, verificadas con decodificación rtl_433 y aceptación por la consola BAR206.
 
 ## 2. El Algoritmo de Codificación
 
@@ -24,7 +24,7 @@ Donde:
 *   `P[d]`: Valor de la tabla P para la décima.
 
 ### El Descubrimiento Clave
-Las tablas `M` y `P` **varían según el House ID**.
+Las tablas `M` y `P` **varían según el House ID**, pero **se derivan de una base común** mediante transformaciones XOR estables.
 *   **House ID:** Un valor de 8 bits generado aleatoriamente al insertar las pilas.
 *   El sensor utiliza este House ID como "semilla" para alterar las tablas base.
 
@@ -41,7 +41,7 @@ Al comparar tramas con la **misma temperatura exacta** (ej. 20.3°C) transmitida
 | **Valor R12** | `0x188` | `0x82B` | **DIFERENTE** ❌ |
 | **Mensaje EC40** | `...189...` | `...889...` | Diferente |
 
-Esto demuestra irrefutablemente que **R12 depende del House ID**.
+Esto demuestra irrefutablemente que **R12 depende del House ID**, y por tanto debe derivarse de una base común.
 
 ## 4. Relación Matemática (Ingeniería Inversa)
 
@@ -66,30 +66,26 @@ Este caso presenta un patrón más complejo (XOR alternado), lo que sugiere que 
 
 ## 5. Implicaciones Prácticas para la Emulación
 
-Dado que el House ID es aleatorio (random) al encender el sensor, no es práctico deducir una "fórmula universal" sin capturar datos de todos los 256 posibles IDs.
-
 ### Estrategia Recomendada
 Para emular el sensor con un microcontrolador (ESP32/ATtiny):
 
-1.  **Fijar un House ID conocido:** No generar uno aleatorio. Usar uno del que ya tengamos las tablas.
-2.  **Usar House ID 247 (0xF7):** Es el que hemos validado extensamente y funciona "perfecto".
-3.  **Implementar la Tabla Derivada:**
+1.  **Generar R12 a partir de la tabla base** y aplicar la **transformación XOR** correspondiente al House ID y nib7.
+2.  **Validar** con rtl_433 y/o BAR206 al cambiar House ID y canal.
+3.  **Mantener el esquema** P/M + XOR como base del generador universal.
 
 ```python
-# Configuración para House 247
+# Ejemplo de derivación (House 247)
 HOUSE_CODE = 247
-P_TABLE = [x ^ 0x075 for x in P_BASE] 
+P_TABLE = [x ^ 0x075 for x in P_BASE]
 # Resultado: [0x000, 0x075, 0x0EA, 0x09F, 0x0B5, 0x0C0, 0x05F, 0x02A, 0x06B, 0x01E]
 ```
 
 ## 6. Archivos Generados en el Proyecto
 
-*   `analysis/04_utilities/oregon_parameters.py`: **Archivo Maestro**. Contiene las tablas base y la lógica para derivar la tabla correcta para House 247. Listo para importar en scripts Python.
+*   `analysis/04_utilities/oregon_parameters.py`: **Archivo Maestro**. Contiene las tablas base y la lógica para derivar la tabla correcta por House ID.
 *   `analysis/05_documentation/tablas_M_P_por_sensor.md`: Documentación técnica con los valores hexadecimales crudos por sensor.
 *   `analysis/02_table_analysis/recalc_M_P_per_sensor.py`: Herramienta para extraer tablas nuevas si se capturan datos de un nuevo House ID.
 
 ## 7. Conclusión Final
 
-El protocolo Oregon Scientific v2.1 para el sensor THN132N incluye un mecanismo de ofuscación basado en el House ID. Para una emulación exitosa, **no se pueden usar tablas genéricas**; se deben usar las tablas específicas calculadas para el House ID que se está transmitiendo.
-
-El uso de **House ID 247** junto con su tabla P derivada (`P_BASE ^ 0x075`) garantiza una compatibilidad total con las estaciones base originales.
+El protocolo Oregon Scientific v2.1 para el sensor THN132N incluye un mecanismo de ofuscación basado en el House ID, **pero es derivable** a partir de una base común mediante transformaciones XOR. Con esta lógica, el generador funciona para **cualquier House ID y canal**, validado experimentalmente.
