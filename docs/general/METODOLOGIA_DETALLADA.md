@@ -358,7 +358,7 @@ P Value │ Count │ Bar
 **Test χ² per P vs House ID**:
 - χ² = 243.5
 - p-value < 0.001
-- **Conclusió**: P depèn del House ID
+- **Conclusió**: P depèn del House ID, però és derivable per XOR des d'una base
 
 **Test χ² per P vs Nib7**:
 - χ² = 1872.3
@@ -505,7 +505,7 @@ for idx in temps_complete:
 
 1. **Dataset finit**: No cobreix tot l'espai paramètric
 2. **Temps de captura**: House IDs aleatoris difícils
-3. **LUT necessària**: No es va trobar fórmula universal per P
+3. **LUT necessària**: No hi ha fórmula tancada simple, però la derivació XOR és universal
 
 ---
 
