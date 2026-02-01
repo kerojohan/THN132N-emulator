@@ -25,6 +25,15 @@ Aquest document presenta una investigació exhaustiva del protocol de transmissi
 
 ---
 
+## Nota d'estat (Febrer 2026)
+
+Aquesta documentació s'ha ajustat per reflectir el **firmware real** que s'està utilitzant avui:
+- El firmware **ATtiny85 + AHT20** i l'**ESP32** actuals generen R12 amb **taules fixes** (P/M) derivades per **House 247** i **nib7=0x2**.
+- **No** s'implementa variació per House ID ni per nibble 7 en aquests firmwares; per tant **no són universals** en el sentit estricte.
+- Les fórmules universals que sí són vàlides i estables són les de **R1/M**; per a **P** s'utilitza LUT base + XOR, però el firmware actual queda fixat a un únic cas.
+
+---
+
 ## Índex
 
 1. [Introducció](#1-introducció)
@@ -558,7 +567,7 @@ ESP32(gen) → FS1000A → RTL-SDR → rtl_433
 
 ### 13.3 Dataset
 
-- Disponible a: `ec40_capturas_merged.csv`
+- Disponible a: `analysis/ec40_capturas_merged.csv`
 - 2196 trames verificades
 - 8 House IDs únics
 
@@ -592,7 +601,58 @@ Document complet: `verification_table.csv`
 
 **Generador Arduino**: `firmware/esp32/oregon_transmitter_universal.ino`
 **LUT Python**: `analysis/04_universal_mp_analysis/Docs/oregon_p_lut_complete.py`
-**Scripts investigació**: `investigation_scripts/`
+**Scripts investigació**: `analysis/04_universal_mp_analysis/investigation_scripts/`
+
+### Annex E: Firmware ATtiny85 + AHT20 (estat real)
+
+#### Objectiu real del firmware
+Emular un sensor THN132N amb lectura de temperatura AHT20 i emissió RF 433 MHz, **amb taules R12 fixes** (no universals).
+
+#### Hardware i pins
+- **AHT20 SDA** → PB2  
+- **AHT20 SCL** → PB0  
+- **RF Data** → PB4  
+- **LED** → PB1 (integrat)
+
+#### Paràmetres fixos
+- **Channel**: `g_channel = 1` (mapa: 1=Ch1, 2=Ch2, 4=Ch3)  
+- **Device ID (House)**: `g_device_id = 131` (clonat)  
+- **Taules R12**: P/M fixes derivades per **House 247** amb **nib7=0x2**  
+  - Fórmula: `R12 = P[d] XOR M[e]`
+  - Rang e: **-16..54**
+
+#### Càlcul de payload
+- **EC40 post-reflect** amb checksum OS v2.1  
+- Reflecteix nibbles per obtenir **EC40 pre-reflect**  
+- Header: `0x55 0x55 0x55 0x55 0x99`  
+- **Manchester** sobre 8 bytes → total **168 bits**
+
+#### Transmissió RF
+- **Asimetria de timings** (important per BAR206):  
+  - `HIGH_UNIT_US = 441`  
+  - `LOW_UNIT_US  = 473`  
+  - `INTER_FRAME_GAP_US = 8240`
+- **Escalat per Vcc** amb bandgap (nominal 5000 mV)  
+- Envia **2 trames** consecutives amb gap llarg
+
+#### Lectura de temperatura
+- Soft I2C a pins PB2/PB0  
+- AHT20 amb reintents si falla  
+- Arrodoneix a **0.1 °C**  
+- Si falla, reutilitza l'últim valor vàlid
+
+#### Power saving i interval
+- WDT en mode power-down (~4 s per cicle)  
+- Interval final ajustat per canal:  
+  - Ch1 ≈ **39 s**  
+  - Ch2 ≈ **41 s**  
+  - Ch3 ≈ **43 s**  
+- Delay actiu per ajustar l’interval exacte
+
+#### Limitacions actuals
+- **No** implementa variació per House ID o nibble 7  
+- Taules R12 fixes (cas House 247, nib7=0x2)  
+- Per canviar House/Channel cal recompilar
 
 ---
 

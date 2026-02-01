@@ -8,7 +8,6 @@ Antigravity/
 │   ├── general/
 │   │   ├── Documentació Final.md
 │   │   ├── METODOLOGIA_DETALLADA.md          📖 Metodologia científica
-│   │   ├── Oregon_THN132N_BAR206.pdf
 │   │   └── Oregon_THN132N_Protocol_Analysis.md
 │   └── easyeda/                            📐 PCB i esquemes
 │
@@ -57,7 +56,6 @@ Antigravity/
 - `Documentació Final.md` - Document final del projecte
 - `METODOLOGIA_DETALLADA.md` - Metodologia científica completa
 - `Oregon_THN132N_Protocol_Analysis.md` - Anàlisi protocol
-- `Oregon_THN132N_BAR206.pdf` - PDF tècnic
 
 ### 3. Documentació Tècnica
 **`analysis/04_universal_mp_analysis/Docs/`**

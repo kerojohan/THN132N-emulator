@@ -86,7 +86,6 @@ P(8) = P(2) XOR 0x7
 │   ├── general/
 │   │   ├── Documentació Final.md
 │   │   ├── METODOLOGIA_DETALLADA.md          📖 Metodologia
-│   │   ├── Oregon_THN132N_BAR206.pdf
 │   │   └── Oregon_THN132N_Protocol_Analysis.md
 │   └── easyeda/                            📐 PCB i esquemes
 │
