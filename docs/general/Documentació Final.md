@@ -11,12 +11,12 @@
 
 ## Resum Executiu
 
-Aquest document presenta una investigació exhaustiva del protocol de transmissió Oregon Scientific THN132N (ID: EC40), incloent el procés complet de reverse engineering, més de 20,000 proves algorísmiques, i el desenvolupament d'un generador universal optimitzat.
+Aquest document presenta una investigació exhaustiva del protocol de transmissió Oregon Scientific THN132N (ID: EC40), incloent el procés complet de reverse engineering, més de 20,000 proves algorísmiques, i el desenvolupament d'un generador optimitzat (firmware actual fixat a House 247).
 
 **Resultats Principals**:
 - Descobriment del nibble 7 variable (rolling code)
 - Fórmula universal per R1 i M (100% precisió)
-- Transformacions XOR constants per P (100% verificades)
+- Transformacions XOR constants per P (100% verificades per variants de nib7 analitzades)
 - Reducció del 83% en memòria necessària
 - Generador final amb 86.79% de precisió
 
@@ -67,7 +67,7 @@ Malgrat l'existència de decodificadors (com rtl_433), la generació de trames v
 ### 1.3 Motivació
 
 Objectius pràctics:
-1. Desenvolupar un generador universal per qualsevol House ID
+1. Desenvolupar un generador universal per qualsevol House ID (objectiu inicial)
 2. Minimitzar l'ús de memòria en microcontroladors
 3. Comprendre completament el protocol
 
@@ -78,13 +78,13 @@ Objectius pràctics:
 ### 2.1 Objectius Primaris
 
 1. **Reverse engineering complet** del protocol de checksums
-2. **Descobrir fórmules matemàtiques universals**
+2. **Descobrir fórmules matemàtiques universals** (objectiu inicial)
 3. **Implementar un generador optimitzat** per Arduino/ESP32
 
 ### 2.2 Mètriques d'Èxit
 
 - **Precisió**: >95% en generació de trames
-- **Universalitat**: Funcionar per qualsevol House ID
+- **Universalitat**: Funcionar per qualsevol House ID (no assolit en firmware actual)
 - **Optimització**: Reducció >50% de memòria
 - **Documentació**: Completa i reproduïble
 
@@ -397,7 +397,7 @@ p = p_base ^ xor_val
 
 ### 10.4 Generador Arduino
 
-**Implementació**: `oregon_transmitter_universal.ino`
+**Implementació**: `firmware/esp32/oregon_transmitter_universal.ino`
 
 **Característiques**:
 - Lectura DS18B20 automàtica
@@ -516,7 +516,7 @@ ESP32(gen) → FS1000A → RTL-SDR → rtl_433
 - Metodologia reproduïble
 
 **Pràctiques**:
-- Generador universal funcional
+- Generador funcional (House 247, nib7=0x2)
 - Optimització significativa de recursos
 - Codi obert per comunitat
 

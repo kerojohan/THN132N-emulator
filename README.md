@@ -1,6 +1,6 @@
 # Oregon Scientific THN132N - Universal Emulator
 
-**Generador universal per Oregon Scientific THN132N basat en reverse engineering exhaustiu**
+**Generador per Oregon Scientific THN132N basat en reverse engineering exhaustiu**
 
 [![Version](https://img.shields.io/badge/version-1.0-blue)]()
 [![Accuracy](https://img.shields.io/badge/accuracy-86.79%25-green)]()
@@ -10,14 +10,14 @@
 
 ## 🎯 Què és aquest projecte?
 
-Un **generador universal** per al protocol de sensors Oregon Scientific THN132N (ID: EC40), desenvolupat mitjançant reverse engineering complet del protocol amb >20,000 proves algorísmiques.
+Un generador per al protocol de sensors Oregon Scientific THN132N (ID: EC40), desenvolupat mitjançant reverse engineering complet del protocol amb >20,000 proves algorísmiques.
 
 **Resultats clau**:
 - ✅ Fórmules universals per checksums R1 i M (100% precisió)
-- ✅ Transformacions XOR constants per checksum P
+- ✅ Transformacions XOR constants per checksum P (valides per variants de nib7 analitzades)
 - ✅ Reducció del 83% en memòria necessària
 - ✅ 86.79% precisió global verificada (2196 trames)
-- ✅ Funciona per qualsevol House ID
+- ✅ Firmware actual fixat a House 247 (nib7=0x2)
 
 ---
 
@@ -69,7 +69,7 @@ m = (total_sum & 0xFF) >> 4
 ### 3. P: Transformacions XOR Constants (100%)
 
 ```python
-# Només necessitem 1 LUT base + 3 constants XOR
+# Només necessitem 1 LUT base + 3 constants XOR (per variants de nib7 analitzades)
 P(1) = P(0) XOR 0xB
 P(2) = P(0) XOR 0x6
 P(8) = P(2) XOR 0x7
@@ -91,7 +91,7 @@ P(8) = P(2) XOR 0x7
 │
 ├── firmware/
 │   ├── esp32/
-│   │   └── oregon_transmitter_universal.ino  ⭐ GENERADOR ARDUINO
+│   │   └── oregon_transmitter_universal.ino  ⭐ GENERADOR ARDUINO (House 247)
 │   └── attiny/
 │       └── attiny85THN132N_aht20.ino
 │
@@ -187,7 +187,7 @@ Pos  Nibble   Descripció
 - DS18B20: GPIO 5
 - FS1000A: GPIO 4
 
-**Configuració**: Editar a `oregon_transmitter_universal.ino`
+**Configuració**: Editar a `firmware/esp32/oregon_transmitter_universal.ino`
 ```cpp
 static uint8_t CHANNEL    = 1;
 static uint8_t DEVICE_ID  = 247;

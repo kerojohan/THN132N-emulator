@@ -13,7 +13,7 @@ Antigravity/
 │
 ├── firmware/
 │   ├── esp32/
-│   │   ├── oregon_transmitter_universal.ino  ⭐ GENERADOR FINAL
+│   │   ├── oregon_transmitter_universal.ino  ⭐ GENERADOR FINAL (House 247)
 │   │   └── oregon_transmitter.ino            (versió amb LUTs)
 │   └── attiny/
 │       ├── attiny85THN132N.ino
@@ -46,7 +46,7 @@ Antigravity/
 
 ### 1. Implementació Arduino (RECOMANAT)
 **`firmware/esp32/oregon_transmitter_universal.ino`**
-- Generador complet amb fórmules universals
+- Generador actual (House 247, nib7=0x2)
 - Inclou LUT de P optimitzada (405 punts)
 - Transformacions XOR per rolling codes
 - 86.79% precisió verificada
