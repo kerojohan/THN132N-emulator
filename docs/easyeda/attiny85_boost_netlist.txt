@@ -1,0 +1,30 @@
+# Netlist-style wiring (EasyEDA import helper)
+# Format: NET_NAME: pin, pin, pin...
+
+BAT+: H1.1, H2.3
+BAT-: H1.2, H2.4
+
+TP_OUT+: H2.1, H3.1
+TP_OUT-: H2.2, H3.2
+
+5V_BOOST: H3.3, H4.1, Q1.S, R1.1
+GND: H3.4, H4.2, H5.2, H6.2, C1.2, C2.2, C3.2
+
+ATtiny_PWR_CTRL: H4.6, R2.1, Q1.G
+5V_SW: Q1.D, H5.1, H6.1, C2.1, C3.1
+
+AHT10_SCL: H4.3, H5.4
+AHT10_SDA: H4.4, H5.3
+FS1000A_DATA: H4.5, H6.3
+
+# Optional series resistors on I2C lines (if used)
+# AHT10_SCL: H4.3 -> R3 -> H5.4
+# AHT10_SDA: H4.4 -> R4 -> H5.3
+
+# Components
+# Q1: P-MOSFET SOT-23 (AO3407A / IRLML6402 / SI2301)
+# R1: 100k pull-up gate to 5V_BOOST (R1.1=5V_BOOST, R1.2=Q1.G)
+# R2: 100 ohm gate series (R2.1=ATtiny_PWR_CTRL, R2.2=Q1.G)
+# C1: 10uF + 100nF on 5V_BOOST to GND (near MT3608)
+# C2: 10uF on 5V_SW to GND (near AHT10)
+# C3: 10uF on 5V_SW to GND (near FS1000A)

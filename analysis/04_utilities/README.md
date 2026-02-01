@@ -137,13 +137,13 @@ cp oregon_parameters.py /tu/proyecto/
 ### Opción 2: Agregar al PATH de Python
 ```python
 import sys
-sys.path.append('/path/to/ec40_lut_suite/04_utilities')
+sys.path.append('/path/to/analysis/04_utilities')
 from oregon_parameters import calculate_r12
 ```
 
 ### Opción 3: Instalación como paquete
 ```bash
-cd ec40_lut_suite/04_utilities
+cd analysis/04_utilities
 pip install -e .  # Si se crea setup.py
 ```
 

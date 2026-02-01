@@ -1,6 +1,6 @@
 
 # Python virtual environment
-ec40_lut_suite/env/
+analysis/env/
 env/
 venv/
 .env
@@ -11,3 +11,6 @@ __pycache__/
 # IDEs
 .vscode/
 .idea/
+
+# Local secrets
+derivados/hx711-2/secrets.h

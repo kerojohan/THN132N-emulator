@@ -153,7 +153,7 @@ Basados en los análisis documentados:
 
 ## 🔗 Enlaces Útiles
 
-- Raíz del proyecto: `/ec40_lut_suite/`
+- Raíz del proyecto: `/analysis/`
 - Scripts de análisis: `/03_house_correlation/`
 - Utilidades: `/04_utilities/`
 - Datos: `/ec40_capturas_merged.csv`

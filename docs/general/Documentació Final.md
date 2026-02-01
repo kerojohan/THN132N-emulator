@@ -590,8 +590,8 @@ Document complet: `verification_table.csv`
 
 ### Annex D: Codi Font
 
-**Generador Arduino**: `esp32/oregon_transmitter_universal.ino`
-**LUT Python**: `Docs/oregon_p_lut_complete.py`
+**Generador Arduino**: `firmware/esp32/oregon_transmitter_universal.ino`
+**LUT Python**: `analysis/04_universal_mp_analysis/Docs/oregon_p_lut_complete.py`
 **Scripts investigació**: `investigation_scripts/`
 
 ---

@@ -53,5 +53,5 @@ Els resultats finals de tota aquesta investigació estan documentats a:
 Si vols revisar el procés d'investigació, pots executar aquests scripts, però **no són necessaris per utilitzar el generador**.
 
 Per utilitzar el generador final, consulta:
-- `/esp32/oregon_transmitter_universal.ino` (Arduino)
+- `/firmware/esp32/oregon_transmitter_universal.ino` (Arduino)
 - `../Docs/oregon_p_lut_complete.py` (Python)

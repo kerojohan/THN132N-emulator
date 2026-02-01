@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Genera un document de verificació detallat comparant captures vs generador.
-PROCESСА TOTS els CSVs de captures de la carpeta ec40_lut_suite.
+PROCESСА TOTS els CSVs de captures de la carpeta analysis.
 """
 
 import csv

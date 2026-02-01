@@ -84,9 +84,9 @@ P_TABLE = [x ^ 0x075 for x in P_BASE]
 
 ## 6. Archivos Generados en el Proyecto
 
-*   `ec40_lut_suite/oregon_parameters.py`: **Archivo Maestro**. Contiene las tablas base y la lógica para derivar la tabla correcta para House 247. Listo para importar en scripts Python.
-*   `ec40_lut_suite/tablas_M_P_por_sensor.md`: Documentación técnica con los valores hexadecimales crudos por sensor.
-*   `ec40_lut_suite/recalc_M_P_per_sensor.py`: Herramienta para extraer tablas nuevas si se capturan datos de un nuevo House ID.
+*   `analysis/04_utilities/oregon_parameters.py`: **Archivo Maestro**. Contiene las tablas base y la lógica para derivar la tabla correcta para House 247. Listo para importar en scripts Python.
+*   `analysis/05_documentation/tablas_M_P_por_sensor.md`: Documentación técnica con los valores hexadecimales crudos por sensor.
+*   `analysis/02_table_analysis/recalc_M_P_per_sensor.py`: Herramienta para extraer tablas nuevas si se capturan datos de un nuevo House ID.
 
 ## 7. Conclusión Final
 

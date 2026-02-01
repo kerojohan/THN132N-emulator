@@ -22,7 +22,7 @@ python3 merge_ec40_csvs.py file1.csv file2.csv ... -o output.csv
 
 ## Datasets
 
-Los datasets CSV se encuentran en el directorio raíz de `ec40_lut_suite/`:
+Los datasets CSV se encuentran en el directorio raíz de `analysis/`:
 
 - **`ec40_live.csv`** - Capturas en tiempo real (~120 tramas)
 - **`ec40_capturas_merged.csv`** - Dataset consolidado (2197 tramas, 8 house IDs, -16°C a 61°C)

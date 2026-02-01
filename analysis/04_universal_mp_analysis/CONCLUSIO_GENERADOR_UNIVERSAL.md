@@ -167,7 +167,7 @@ uint16_t calc_R12(float temp_c) {
 
 ### Implementació Final
 
-**Arxiu**: `esp32/oregon_transmitter_universal.ino`
+**Arxiu**: `firmware/esp32/oregon_transmitter_universal.ino`
 
 **Components clau**:
 1. Taules P[10] i M[71] completes (House 247, Nib7=0x2)
@@ -201,4 +201,3 @@ uint16_t calc_R12(float temp_c) {
 
 **Recomanació**: 
 Utilitzar aquest generador per aplicacions reals. És completament compatible amb el protocol Oregon Scientific v2.1 i reconegut pels receptors oficials.
-

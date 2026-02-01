@@ -1,0 +1,13 @@
+Item,Qty,Reference,Value,Package/Footprint,Notes
+1,1,H1,HEADER 1x2,HEADER_1x2_2.54,Battery 18650
+2,1,H2,HEADER 1x4,HEADER_1x4_2.54,TP4056 module
+3,1,H3,HEADER 1x4,HEADER_1x4_2.54,MT3608 module (VIN+/VIN-/VOUT+/VOUT-)
+4,1,H4,HEADER 1x6,HEADER_1x6_2.54,Digispark ATtiny85 module
+5,1,H5,HEADER 1x4,HEADER_1x4_2.54,AHT10 module
+6,1,H6,HEADER 1x3,HEADER_1x3_2.54,FS1000A module
+7,1,Q1,AO3407A,SOT-23,P-MOSFET high-side switch
+8,1,R1,100k,0603 or 0805,Gate pull-up to 5V_BOOST
+9,1,R2,100,0603 or 0805,Gate series resistor
+10,2,C1,C2,10uF,0603 or 0805,Decoupling (5V_BOOST and 5V_SW)
+11,1,C3,100nF,0603 or 0805,Decoupling (5V_BOOST)
+12,0-2,R3,R4,1k,0603 or 0805,Optional I2C series resistors

@@ -8,7 +8,7 @@
  * - Nibble 7: Rolling code configurable
  * 
  * Basat en la investigació exhaustiva documentada a:
- * ec40_lut_suite/04_universal_mp_analysis/Docs/
+ * analysis/04_universal_mp_analysis/Docs/
  */
 
 #include <Arduino.h>

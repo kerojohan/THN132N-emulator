@@ -112,7 +112,7 @@ python3 analyze_multi_house.py ../ec40_capturas_merged.csv
 ```python
 # En tu código
 import sys
-sys.path.append('/path/to/ec40_lut_suite/04_utilities')
+sys.path.append('/path/to/analysis/04_utilities')
 from oregon_parameters import calculate_r12, encode_ec40_bytes
 
 # Usar las funciones

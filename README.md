@@ -26,7 +26,7 @@ Un **generador universal** per al protocol de sensors Oregon Scientific THN132N 
 ### Opció 1: Arduino/ESP32 (Recomanat)
 
 ```cpp
-// Fitxer: esp32/oregon_transmitter_universal.ino
+// Fitxer: firmware/esp32/oregon_transmitter_universal.ino
 #define DEVICE_ID  247    // House Code (0-255)
 #define CHANNEL    1      // Canal (1-3)
 #define ROLLING_CODE 0x2  // Rolling code (0,1,2,8)
@@ -38,7 +38,7 @@ Un **generador universal** per al protocol de sensors Oregon Scientific THN132N 
 ### Opció 2: Python
 
 ```python
-from ec40_lut_suite.Docs.oregon_p_lut_complete import get_p
+from oregon_p_lut_complete import get_p
 
 # Obtenir checksum P per temperatura i rolling code
 p = get_p(temp_celsius=20.5, nib7=0x2)
@@ -82,16 +82,21 @@ P(8) = P(2) XOR 0x7
 ## 📁 Estructura del Projecte
 
 ```
-├── Docs/ 📚
-│   ├── Documentació Final.md
-│   ├── METODOLOGIA_DETALLADA.md          📖 Metodologia
-│   ├── Oregon_THN132N_BAR206.pdf
-│   └── Oregon_THN132N_Protocol_Analysis.md
+├── docs/ 📚
+│   ├── general/
+│   │   ├── Documentació Final.md
+│   │   ├── METODOLOGIA_DETALLADA.md          📖 Metodologia
+│   │   ├── Oregon_THN132N_BAR206.pdf
+│   │   └── Oregon_THN132N_Protocol_Analysis.md
+│   └── easyeda/                            📐 PCB i esquemes
 │
-├── esp32/
-│   └── oregon_transmitter_universal.ino  ⭐ GENERADOR ARDUINO
+├── firmware/
+│   ├── esp32/
+│   │   └── oregon_transmitter_universal.ino  ⭐ GENERADOR ARDUINO
+│   └── attiny/
+│       └── attiny85THN132N_aht20.ino
 │
-├── ec40_lut_suite/
+├── analysis/
 │   ├── ec40_capturas_merged.csv          📊 Dataset (2196 trames)
 │   └── 04_universal_mp_analysis/
 │       ├── Docs/ ⭐                        📚 DOCUMENTACIÓ TÈCNICA
@@ -101,27 +106,31 @@ P(8) = P(2) XOR 0x7
 │       │   └── p_algorithm_tests.md         >20k proves
 │       └── investigation_scripts/         🔬 Scripts proves
 │
-├── README.md                              📖 Aquesta pàgina
-└── ESTRUCTURA_PROYECTO.md                 🗺️ Mapa complet
+├── derivados/
+│   └── hx711-2/                            🧪 Projecte derivat
+├── logs/
+│   └── tuning_log.csv
+├── README.md                               📖 Aquesta pàgina
+└── ESTRUCTURA_PROYECTO.md                  🗺️ Mapa complet
 ```
 
 ---
 
 ## 📖 Documentació
 
-### Documentació Principal (Carpeta Docs/)
-- **[Docs/Documentació Final.md](Docs/Documentació%20Final.md)** - Document final del projecte
-- **[Docs/METODOLOGIA_DETALLADA.md](Docs/METODOLOGIA_DETALLADA.md)** - Metodologia científica completa
-- **[Docs/Oregon_THN132N_Protocol_Analysis.md](Docs/Oregon_THN132N_Protocol_Analysis.md)** - Anàlisi protocol
+### Documentació Principal (Carpeta docs/general/)
+- **[docs/general/Documentació Final.md](docs/general/Documentació%20Final.md)** - Document final del projecte
+- **[docs/general/METODOLOGIA_DETALLADA.md](docs/general/METODOLOGIA_DETALLADA.md)** - Metodologia científica completa
+- **[docs/general/Oregon_THN132N_Protocol_Analysis.md](docs/general/Oregon_THN132N_Protocol_Analysis.md)** - Anàlisi protocol
 - **[ESTRUCTURA_PROYECTO.md](ESTRUCTURA_PROYECTO.md)** - Mapa complet del projecte
 
 ### Documentació Tècnica
-- **[Docs/README.md](ec40_lut_suite/04_universal_mp_analysis/Docs/README.md)** - Guia tècnica completa
-- **[oregon_p_lut_complete.py](ec40_lut_suite/04_universal_mp_analysis/Docs/oregon_p_lut_complete.py)** - LUT Python funcional
+- **[README.md](analysis/04_universal_mp_analysis/Docs/README.md)** - Guia tècnica completa
+- **[oregon_p_lut_complete.py](analysis/04_universal_mp_analysis/Docs/oregon_p_lut_complete.py)** - LUT Python funcional
 
 ### Verificació i Proves
-- **[verification_table.md](ec40_lut_suite/04_universal_mp_analysis/Docs/verification_table.md)** - 2196 trames verificades
-- **[p_algorithm_tests.md](ec40_lut_suite/04_universal_mp_analysis/Docs/p_algorithm_tests.md)** - >20,000 proves documentades
+- **[verification_table.md](analysis/04_universal_mp_analysis/Docs/verification_table.md)** - 2196 trames verificades
+- **[p_algorithm_tests.md](analysis/04_universal_mp_analysis/Docs/p_algorithm_tests.md)** - >20,000 proves documentades
 
 ---
 
@@ -191,7 +200,7 @@ static uint8_t ROLLING_CODE = 0x2;
 **Instal·lació**:
 ```bash
 # Copiar LUT
-cp ec40_lut_suite/04_universal_mp_analysis/Docs/oregon_p_lut_complete.py .
+cp analysis/04_universal_mp_analysis/Docs/oregon_p_lut_complete.py .
 
 # Usar
 python3
@@ -252,7 +261,7 @@ https://github.com/kerojohan/THN132N-emulator
 ## 📞 Contacte
 
 **Repositori**: [GitHub - THN132N-emulator](https://github.com/kerojohan/THN132N-emulator)  
-**Documentació**: Veure carpeta `Docs/`
+**Documentació**: Veure carpeta `docs/general/`
 
 ---
 
