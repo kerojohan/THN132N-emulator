@@ -18,6 +18,7 @@ Un generador per al protocol de sensors Oregon Scientific THN132N (ID: EC40), de
 - ✅ Reducció del 83% en memòria necessària
 - ✅ 86.79% precisió global verificada (2196 trames)
 - ✅ Funciona per qualsevol House ID i canal (validat)
+- ✅ Validació BAR206/THN132N: la posició física 3 es codifica com `CHANNEL=4`, amb `DEVICE_ID=255` i ajust R12 `0x9E1` per replicar el sensor original
 
 ---
 
@@ -27,8 +28,8 @@ Un generador per al protocol de sensors Oregon Scientific THN132N (ID: EC40), de
 
 ```cpp
 // Fitxer: firmware/esp32/oregon_transmitter_universal.ino
-#define DEVICE_ID  247    // House Code (0-255)
-#define CHANNEL    1      // Canal (1-3)
+#define DEVICE_ID  255    // House Code (0-255)
+#define CHANNEL    4      // Posició física 3 en THN132N/BAR206
 #define ROLLING_CODE 0x2  // Rolling code (0,1,2,8)
 
 // Compilar i pujar a ESP32
@@ -172,6 +173,27 @@ Pos  Nibble   Descripció
 15   X        Postamble
 ```
 
+### Validació BAR206 canal físic 3
+
+La posició física `3` del THN132N original no aparece como `3` en el payload EC40: `rtl_433` la decodifica como `channel=4` porque el nibble de canal usa valores `1`, `2`, `4`.
+
+Captura del sensor original:
+
+```text
+raw=555555559995a5a6aaa65555a9a9aa5aaa5a666999
+EC40=ec404ff88030359a
+temp=30.8°C channel=4 id=255 r12=0x89A
+```
+
+Configuración validada en receptor BAR206:
+
+```cpp
+static uint8_t CHANNEL = 4;
+static uint8_t DEVICE_ID = 255;
+```
+
+Para esta combinación se aplica `R12 ^= 0x9E1` antes de insertar R12 en el mensaje. La emulación se verificó con SDR/`rtl_433` como `Oregon-THN132N`, `channel=4`, `id=255`, SNR aproximado `19 dB`, y fue aceptada por la pantalla BAR206.
+
 ---
 
 ## 🛠️ Implementació
@@ -189,8 +211,8 @@ Pos  Nibble   Descripció
 
 **Configuració**: Editar a `firmware/esp32/oregon_transmitter_universal.ino`
 ```cpp
-static uint8_t CHANNEL    = 1;
-static uint8_t DEVICE_ID  = 247;
+static uint8_t CHANNEL    = 4;
+static uint8_t DEVICE_ID  = 255;
 static uint8_t ROLLING_CODE = 0x2;
 ```
 

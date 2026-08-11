@@ -9,6 +9,8 @@ Se ha confirmado que las tablas de codificación (M y P) del sensor THN132N **s�
 
 En la práctica, el emulador genera tramas válidas para distintos House IDs y canales, verificadas con decodificación rtl_433 y aceptación por la consola BAR206.
 
+Actualización experimental 2026-08-11: la posición física 3 del selector THN132N se codifica en EC40 como `channel=4` (valores válidos `1`, `2`, `4`). Se capturó el sensor original como `EC40=ec404ff88030359a`, `temp=30.8°C`, `channel=4`, `id=255`, `R12=0x89A`; la emulación BAR206 aceptada usa `DEVICE_ID=255`, `CHANNEL=4` y ajuste `R12 ^= 0x9E1`.
+
 ## 2. El Algoritmo de Codificación
 
 El sensor utiliza un valor intermedio de 12 bits, denominado **R12**, para codificar la temperatura. Este valor se distribuye en el mensaje EC40.
@@ -65,6 +67,28 @@ P_247[d] = P_BASE[d] XOR 0x075
 Este caso presenta un patrón más complejo (XOR alternado), lo que sugiere que la función de generación depende de los bits específicos del House ID.
 
 ## 5. Implicaciones Prácticas para la Emulación
+
+### Mapeo del canal físico 3
+
+En sensores THN132N/BAR206, el selector físico de canal usa el nibble Oregon `1`, `2`, `4`, no `1`, `2`, `3`. Por tanto, para reemplazar un sensor configurado en canal físico 3 hay que transmitir `channel=4`.
+
+La captura validada del sensor original fue:
+
+```text
+raw=555555559995a5a6aaa65555a9a9aa5aaa5a666999
+EC40=ec404ff88030359a
+temp=30.8°C channel=4 id=255 r12=0x89A
+```
+
+La configuración que la BAR206 aceptó como reemplazo fue:
+
+```cpp
+CHANNEL = 4;
+DEVICE_ID = 255;
+R12 ^= 0x9E1;
+```
+
+El frame emitido por ESP32-C3/CC1101 se validó con `rtl_433` como `Oregon-THN132N`, `channel=4`, `id=255`, temperatura correcta y SNR aproximado de 19 dB.
 
 ### Estrategia Recomendada
 Para emular el sensor con un microcontrolador (ESP32/ATtiny):

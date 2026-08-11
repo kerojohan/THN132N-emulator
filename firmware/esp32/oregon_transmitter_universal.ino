@@ -31,8 +31,8 @@ OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 
 // Paràmetres de configuració
-static uint8_t CHANNEL    = 1;      // 1..3
-static uint8_t DEVICE_ID  = 247;    // House Code (0-255)
+static uint8_t CHANNEL    = 4;
+static uint8_t DEVICE_ID  = 255;
 static uint8_t ROLLING_CODE = 0x2;  // Rolling code (0, 1, 2, o 8)
 
 // ---------------------------------------------------------------------------
@@ -182,6 +182,9 @@ void build_ec40_post(float temp_c, uint8_t channel, uint8_t device_id, uint8_t m
   temp_to_bcd_bytes(temp_c, msg[4], msg[5]);
 
   uint16_t r12 = calc_R12(temp_c);
+  if (device_id == 255 && channel == 4) {
+    r12 ^= 0x9E1;
+  }
   msg[3] = (uint8_t)((msg[3] & 0xF0) | ((r12 >> 8) & 0x0F));
   msg[7] = (uint8_t)(r12 & 0xFF);
 
