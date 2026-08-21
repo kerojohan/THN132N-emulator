@@ -627,11 +627,10 @@ Emular un sensor THN132N amb lectura de temperatura AHT20 i emissió RF 433 MHz,
 - **Manchester** sobre 8 bytes → total **168 bits**
 
 #### Transmissió RF
-- **Asimetria de timings** (important per BAR206):  
-  - `HIGH_UNIT_US = 441`  
-  - `LOW_UNIT_US  = 473`  
-  - `INTER_FRAME_GAP_US = 8240`
-- **Escalat per Vcc** amb bandgap (nominal 5000 mV)  
+- **Asimetria de timings**:
+  - ATtiny/FS1000A amb escalat Vcc validat originalment: `HIGH_UNIT_US = 441`, `LOW_UNIT_US = 473`, `INTER_FRAME_GAP_US = 8240`
+  - ESP32-C3/CC1101 validat amb BAR206: `HIGH_UNIT_US = 471`, `LOW_UNIT_US = 506`, `INTER_FRAME_GAP_US = 8714`
+- **Escalat per Vcc** amb bandgap (nominal 5000 mV) només en la implementació ATtiny
 - Envia **2 trames** consecutives amb gap llarg
 
 #### Lectura de temperatura
